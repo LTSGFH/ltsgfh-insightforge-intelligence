@@ -1,0 +1,1622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<meta name="description" content="LTSGFH InsightForge Intelligence — Business Intelligence, Data Analytics, Dashboard Development, and Trading Analytics across 11 industries."/>
+<title>LTSGFH InsightForge Intelligence | Transforming Data into Intelligence</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet"/>
+<style>
+/* ================================================================
+   ROOT & RESET
+================================================================ */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --navy:#080f1e;
+  --navy-2:#0a1628;
+  --navy-3:#0d1f3c;
+  --navy-4:#112240;
+  --teal:#00b4d8;
+  --teal-2:#0096c7;
+  --teal-3:#48cae4;
+  --teal-glow:rgba(0,180,216,.14);
+  --teal-border:rgba(0,180,216,.28);
+  --white:#ffffff;
+  --off-white:#f8fafc;
+  --gray-1:#f1f5f9;
+  --gray-2:#e2e8f0;
+  --gray-3:#cbd5e1;
+  --gray-4:#94a3b8;
+  --gray-5:#64748b;
+  --text-dark:#0f172a;
+  --text-body:#475569;
+  --gold:#f59e0b;
+  --green:#22c55e;
+  --font-body:'Inter',sans-serif;
+  --font-head:'Poppins',sans-serif;
+  --sh-sm:0 2px 8px rgba(0,0,0,.07);
+  --sh-md:0 8px 32px rgba(0,0,0,.11);
+  --sh-lg:0 24px 64px rgba(0,0,0,.16);
+  --sh-teal:0 8px 32px rgba(0,180,216,.22);
+  --r-sm:8px;
+  --r-md:16px;
+  --r-lg:24px;
+  --r-xl:32px;
+  --tr:all .3s cubic-bezier(.4,0,.2,1);
+}
+html{scroll-behavior:smooth;font-size:16px;}
+body{
+  font-family:var(--font-body);
+  color:var(--text-dark);
+  background:var(--white);
+  overflow-x:hidden;
+  line-height:1.6;
+  min-height:100vh;
+}
+img{max-width:100%;display:block;}
+a{text-decoration:none;color:inherit;}
+ul{list-style:none;}
+::-webkit-scrollbar{width:5px;}
+::-webkit-scrollbar-track{background:var(--navy);}
+::-webkit-scrollbar-thumb{background:var(--teal);border-radius:3px;}
+
+/* ================================================================
+   UTILITY
+================================================================ */
+.container{max-width:1320px;margin:0 auto;padding:0 28px;}
+.section-pad{padding:100px 0;}
+.tag{
+  display:inline-flex;align-items:center;gap:6px;
+  background:var(--teal-glow);color:var(--teal);
+  font-family:var(--font-head);font-size:.72rem;font-weight:700;
+  letter-spacing:2px;text-transform:uppercase;
+  padding:6px 18px;border-radius:50px;
+  border:1px solid var(--teal-border);margin-bottom:18px;
+}
+.h1{font-family:var(--font-head);font-size:clamp(2.4rem,5vw,4rem);font-weight:800;line-height:1.12;letter-spacing:-.02em;}
+.h2{font-family:var(--font-head);font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:700;line-height:1.2;letter-spacing:-.01em;}
+.h3{font-family:var(--font-head);font-size:clamp(1.2rem,2.2vw,1.6rem);font-weight:700;line-height:1.3;}
+.h4{font-family:var(--font-head);font-size:1rem;font-weight:700;line-height:1.4;}
+.teal{color:var(--teal);}
+.white{color:var(--white);}
+.body-lg{font-size:1.08rem;line-height:1.8;color:var(--text-body);}
+.body-md{font-size:.95rem;line-height:1.7;color:var(--text-body);}
+.section-header{text-align:center;margin-bottom:64px;}
+.section-header .h2{margin-bottom:14px;}
+.section-header .body-lg{max-width:620px;margin:0 auto;}
+
+/* BUTTONS */
+.btn{
+  display:inline-flex;align-items:center;gap:9px;
+  padding:13px 30px;border-radius:var(--r-sm);
+  font-family:var(--font-head);font-size:.9rem;font-weight:600;
+  cursor:pointer;border:none;transition:var(--tr);white-space:nowrap;
+  text-decoration:none;
+}
+.btn-primary{
+  background:linear-gradient(135deg,var(--teal),var(--teal-2));
+  color:var(--white);box-shadow:var(--sh-teal);
+}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 14px 40px rgba(0,180,216,.38);}
+.btn-outline-white{background:transparent;color:var(--white);border:2px solid rgba(255,255,255,.4);}
+.btn-outline-white:hover{background:rgba(255,255,255,.1);border-color:var(--white);transform:translateY(-2px);}
+.btn-outline-teal{background:transparent;color:var(--teal);border:2px solid var(--teal);}
+.btn-outline-teal:hover{background:var(--teal);color:var(--white);transform:translateY(-2px);}
+.btn-dark{background:var(--navy-2);color:var(--white);}
+.btn-dark:hover{background:var(--navy-4);transform:translateY(-2px);}
+.btn-sm{padding:9px 22px;font-size:.82rem;}
+.btn-lg{padding:16px 40px;font-size:1rem;}
+
+/* ANIMATIONS */
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .7s ease,transform .7s ease;}
+.reveal.up{opacity:1;transform:translateY(0);}
+.reveal-l{opacity:0;transform:translateX(-30px);transition:opacity .7s ease,transform .7s ease;}
+.reveal-l.up{opacity:1;transform:translateX(0);}
+.reveal-r{opacity:0;transform:translateX(30px);transition:opacity .7s ease,transform .7s ease;}
+.reveal-r.up{opacity:1;transform:translateX(0);}
+
+/* ================================================================
+   PAGE SYSTEM
+================================================================ */
+.page{display:none !important;visibility:hidden;position:absolute;left:-9999px;}
+.page.active{display:block !important;visibility:visible;position:relative;left:0;}
+
+/* ================================================================
+   NAVIGATION
+================================================================ */
+#navbar{
+  position:fixed;top:0;left:0;right:0;z-index:9999;
+  background:rgba(8,15,30,.97);backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
+  box-shadow:0 2px 24px rgba(0,0,0,.3);
+  border-bottom:1px solid rgba(0,180,216,.15);
+}
+.nav-wrap{
+  display:flex;align-items:center;justify-content:space-between;
+  max-width:1320px;margin:0 auto;padding:14px 28px;gap:16px;
+}
+.nav-logo{display:flex;align-items:center;gap:12px;cursor:pointer;flex-shrink:0;}
+.logo-img-box{
+  width:46px;height:46px;border-radius:10px;background:var(--white);
+  display:flex;align-items:center;justify-content:center;overflow:hidden;
+  box-shadow:0 0 0 2px var(--teal-border);flex-shrink:0;
+}
+.logo-img-box img{width:42px;height:42px;object-fit:contain;}
+.logo-txt{display:flex;flex-direction:column;line-height:1.2;}
+.logo-name{font-family:var(--font-head);font-size:.88rem;font-weight:800;color:var(--white);letter-spacing:.3px;}
+.logo-tag{font-size:.6rem;color:var(--teal);font-weight:600;letter-spacing:1.5px;text-transform:uppercase;}
+.nav-links{display:flex;align-items:center;gap:2px;flex:1;justify-content:center;}
+.nav-item{
+  color:rgba(255,255,255,.78);font-size:.87rem;font-weight:500;
+  padding:9px 15px;border-radius:var(--r-sm);cursor:pointer;transition:var(--tr);white-space:nowrap;
+}
+.nav-item:hover,.nav-item.active{color:var(--teal);background:rgba(0,180,216,.1);}
+.nav-cta-btn{flex-shrink:0;padding:11px 24px !important;font-size:.84rem !important;}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:6px;flex-shrink:0;}
+.hamburger span{display:block;width:24px;height:2px;background:var(--white);border-radius:2px;transition:var(--tr);}
+.mob-menu{
+  display:none;position:fixed;top:76px;left:0;right:0;
+  background:rgba(8,15,30,.99);backdrop-filter:blur(20px);
+  padding:20px 28px 28px;z-index:9998;border-bottom:1px solid var(--teal-border);
+}
+.mob-menu.open{display:block;}
+.mob-item{
+  display:block;padding:13px 0;color:rgba(255,255,255,.78);
+  font-weight:500;font-size:.95rem;border-bottom:1px solid rgba(255,255,255,.05);
+  cursor:pointer;transition:var(--tr);
+}
+.mob-item:hover{color:var(--teal);}
+.mob-item:last-child{border-bottom:none;}
+
+/* ================================================================
+   HERO
+================================================================ */
+.hero{
+  min-height:100vh;background:var(--navy);
+  display:flex;align-items:center;position:relative;overflow:hidden;padding:130px 0 80px;
+}
+.hero-bg{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 65% 55% at 75% 45%,rgba(0,180,216,.11) 0%,transparent 65%),
+    radial-gradient(ellipse 40% 40% at 15% 80%,rgba(0,150,199,.07) 0%,transparent 55%);
+  pointer-events:none;
+}
+.hero-grid{
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(0,180,216,.03) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(0,180,216,.03) 1px,transparent 1px);
+  background-size:60px 60px;pointer-events:none;
+}
+.hero-inner{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;position:relative;z-index:1;}
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:10px;
+  background:rgba(0,180,216,.1);border:1px solid var(--teal-border);
+  border-radius:50px;padding:8px 20px;margin-bottom:24px;
+}
+.pulse-dot{width:8px;height:8px;background:var(--teal);border-radius:50%;animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.5;transform:scale(1.5);}}
+.hero-eyebrow span{color:var(--teal);font-size:.76rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;}
+.hero-title{color:var(--white);margin-bottom:22px;}
+.hero-title .grad{
+  background:linear-gradient(135deg,var(--teal),var(--teal-3));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.hero-sub{color:rgba(255,255,255,.65);font-size:1.08rem;line-height:1.8;margin-bottom:36px;max-width:500px;}
+.hero-btns{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:48px;}
+
+/* HERO STATS — FIX #4 */
+.hero-stats{
+  display:flex;gap:0;border:1px solid rgba(255,255,255,.08);
+  border-radius:var(--r-md);overflow:hidden;
+}
+.h-stat{flex:1;padding:18px 20px;text-align:center;border-right:1px solid rgba(255,255,255,.08);}
+.h-stat:last-child{border-right:none;}
+.h-stat .num{font-family:var(--font-head);font-size:1.4rem;font-weight:800;color:var(--teal);display:block;}
+.h-stat .lbl{font-size:.68rem;color:rgba(255,255,255,.4);font-weight:500;margin-top:2px;line-height:1.3;}
+
+/* ================================================================
+   HERO CAROUSEL — FIX #8
+================================================================ */
+.hero-visual{position:relative;}
+.carousel-wrap{
+  position:relative;border-radius:var(--r-lg);overflow:hidden;
+  box-shadow:0 40px 80px rgba(0,0,0,.45);
+  border:1px solid rgba(0,180,216,.22);
+  animation:floatY 7s ease-in-out infinite;
+}
+@keyframes floatY{0%,100%{transform:translateY(0);}50%{transform:translateY(-12px);}}
+.carousel-slide{display:none;width:100%;}
+.carousel-slide.active{display:block;}
+.carousel-slide img{width:100%;height:auto;display:block;}
+.carousel-slide .no-img{
+  min-height:320px;background:var(--navy-3);
+  display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;
+}
+.carousel-slide .no-img i{font-size:3rem;color:rgba(0,180,216,.3);}
+.carousel-slide .no-img p{color:rgba(255,255,255,.25);font-size:.8rem;text-align:center;}
+
+/* Carousel label bar */
+.carousel-label{
+  position:absolute;bottom:0;left:0;right:0;
+  background:linear-gradient(transparent,rgba(8,15,30,.92));
+  padding:28px 18px 14px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.carousel-label span{color:rgba(255,255,255,.75);font-size:.78rem;font-weight:600;letter-spacing:.5px;}
+.carousel-dots{display:flex;gap:6px;}
+.cdot{
+  width:7px;height:7px;border-radius:50%;
+  background:rgba(255,255,255,.25);cursor:pointer;transition:var(--tr);border:none;padding:0;
+}
+.cdot.active{background:var(--teal);width:20px;border-radius:4px;}
+
+.float-badge{
+  position:absolute;background:var(--white);border-radius:10px;
+  padding:10px 16px;box-shadow:var(--sh-md);
+  display:flex;align-items:center;gap:10px;
+  font-size:.78rem;font-weight:700;color:var(--text-dark);z-index:2;
+}
+.float-badge.top-right{top:-16px;right:-16px;animation:floatY 5s ease-in-out infinite 1s;}
+.float-badge.bot-left{bottom:-16px;left:-16px;animation:floatY 5s ease-in-out infinite 2.5s;}
+.float-badge i{color:var(--teal);}
+.badge-up{color:var(--green);}
+
+/* ================================================================
+   CLIENTS STRIP
+================================================================ */
+.clients-strip{
+  background:var(--navy-3);
+  border-top:1px solid rgba(0,180,216,.1);border-bottom:1px solid rgba(0,180,216,.1);
+  padding:26px 0;
+}
+.clients-inner{display:flex;align-items:center;justify-content:center;gap:40px;flex-wrap:wrap;}
+.c-badge{display:flex;align-items:center;gap:9px;color:rgba(255,255,255,.32);font-size:.8rem;font-weight:600;letter-spacing:.3px;transition:var(--tr);}
+.c-badge:hover{color:rgba(255,255,255,.65);}
+.c-badge i{font-size:1.1rem;color:var(--teal);opacity:.55;}
+
+/* ================================================================
+   SERVICES PREVIEW — FIX #7 (reordered)
+================================================================ */
+.services-preview{background:var(--off-white);}
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+.svc-card{
+  background:var(--white);border-radius:var(--r-md);padding:32px 26px;
+  border:1px solid var(--gray-2);transition:var(--tr);position:relative;overflow:hidden;
+}
+.svc-card::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--teal),var(--teal-2));
+  transform:scaleX(0);transform-origin:left;transition:var(--tr);
+}
+.svc-card:hover::after{transform:scaleX(1);}
+.svc-card:hover{transform:translateY(-5px);box-shadow:var(--sh-lg);border-color:transparent;}
+.svc-icon{
+  width:54px;height:54px;border-radius:var(--r-sm);
+  background:var(--teal-glow);border:1px solid var(--teal-border);
+  display:flex;align-items:center;justify-content:center;margin-bottom:18px;transition:var(--tr);
+}
+.svc-icon i{font-size:1.4rem;color:var(--teal);}
+.svc-card:hover .svc-icon{background:var(--teal);}
+.svc-card:hover .svc-icon i{color:var(--white);}
+.svc-card .h4{color:var(--navy-2);margin-bottom:9px;}
+.svc-card p{font-size:.86rem;color:var(--text-body);line-height:1.7;margin-bottom:16px;}
+.svc-list li{font-size:.79rem;color:var(--gray-5);display:flex;align-items:center;gap:7px;margin-bottom:5px;}
+.svc-list li::before{content:'→';color:var(--teal);font-weight:700;font-size:.74rem;}
+
+/* ================================================================
+   INDUSTRIES PREVIEW
+================================================================ */
+.ind-preview{background:var(--navy);}
+.ind-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;}
+.ind-chip{
+  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);
+  border-radius:var(--r-sm);padding:18px 16px;
+  display:flex;align-items:center;gap:11px;cursor:pointer;transition:var(--tr);
+}
+.ind-chip:hover{background:rgba(0,180,216,.1);border-color:var(--teal-border);transform:translateY(-3px);}
+.ind-chip .ic{font-size:1.4rem;}
+.ind-chip span{color:rgba(255,255,255,.72);font-size:.83rem;font-weight:600;}
+
+/* ================================================================
+   WHY CHOOSE US
+================================================================ */
+.why-section{background:var(--white);}
+.why-inner{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center;}
+.why-points{display:flex;flex-direction:column;gap:16px;margin-top:32px;}
+.why-point{display:flex;gap:14px;align-items:flex-start;padding:18px;border-radius:var(--r-sm);border:1px solid var(--gray-2);transition:var(--tr);}
+.why-point:hover{border-color:var(--teal);box-shadow:var(--sh-teal);transform:translateX(4px);}
+.wp-icon{width:42px;height:42px;min-width:42px;border-radius:var(--r-sm);background:var(--teal-glow);border:1px solid var(--teal-border);display:flex;align-items:center;justify-content:center;}
+.wp-icon i{color:var(--teal);font-size:1rem;}
+.why-point h5{font-family:var(--font-head);font-weight:700;color:var(--navy-2);margin-bottom:3px;font-size:.9rem;}
+.why-point p{font-size:.81rem;color:var(--text-body);line-height:1.6;}
+.why-visual{background:var(--navy);border-radius:var(--r-xl);padding:36px;position:relative;overflow:hidden;}
+.why-visual::before{content:'';position:absolute;top:-40%;right:-40%;width:80%;height:80%;background:radial-gradient(circle,rgba(0,180,216,.12),transparent 65%);pointer-events:none;}
+.proc-step{display:flex;gap:16px;align-items:flex-start;padding-bottom:22px;margin-bottom:22px;border-bottom:1px solid rgba(255,255,255,.06);position:relative;z-index:1;}
+.proc-step:last-child{padding-bottom:0;margin-bottom:0;border-bottom:none;}
+.proc-num{width:36px;height:36px;min-width:36px;border-radius:50%;background:linear-gradient(135deg,var(--teal),var(--teal-2));display:flex;align-items:center;justify-content:center;font-family:var(--font-head);font-weight:800;font-size:.8rem;color:var(--white);}
+.proc-step h5{color:var(--white);font-weight:600;margin-bottom:3px;font-size:.88rem;}
+.proc-step p{color:rgba(255,255,255,.42);font-size:.79rem;line-height:1.5;}
+
+/* ================================================================
+   SOLUTIONS PREVIEW
+================================================================ */
+.solutions-preview{background:var(--gray-1);}
+.sol-showcase{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;}
+.sol-features{display:flex;flex-direction:column;gap:10px;margin-bottom:28px;}
+.sol-feat{display:flex;align-items:center;gap:11px;padding:11px 15px;border-radius:var(--r-sm);background:var(--white);border:1px solid var(--gray-2);}
+.sol-feat i{color:var(--teal);font-size:.95rem;width:18px;}
+.sol-feat span{font-size:.86rem;font-weight:600;color:var(--navy-2);}
+.sol-img{border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--sh-lg);}
+.sol-img img{width:100%;height:auto;display:block;}
+.sol-img .no-img{min-height:280px;background:var(--navy);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;border-radius:var(--r-lg);}
+.sol-img .no-img i{font-size:3rem;color:rgba(0,180,216,.3);}
+.sol-img .no-img p{color:rgba(255,255,255,.25);font-size:.8rem;}
+
+/* ================================================================
+   CTA STRIP
+================================================================ */
+.cta-strip{background:linear-gradient(135deg,var(--teal-2),var(--teal));padding:80px 0;}
+.cta-inner{text-align:center;}
+.cta-inner .h2{color:var(--white);margin-bottom:12px;}
+.cta-inner p{color:rgba(255,255,255,.85);font-size:1.05rem;margin-bottom:32px;}
+.cta-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
+
+/* ================================================================
+   PAGE HERO
+================================================================ */
+.page-hero{background:var(--navy);padding:150px 0 80px;position:relative;overflow:hidden;}
+.page-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 55% at 80% 50%,rgba(0,180,216,.1),transparent 65%);pointer-events:none;}
+.page-hero .container{position:relative;z-index:1;}
+.page-hero .h1{color:var(--white);margin-bottom:18px;}
+.page-hero .body-lg{color:rgba(255,255,255,.62);max-width:560px;}
+
+/* ================================================================
+   SERVICES PAGE
+================================================================ */
+.svc-section-inner{display:grid;grid-template-columns:1fr 2fr;gap:56px;align-items:start;}
+.svc-section-inner.rev{direction:rtl;}
+.svc-section-inner.rev>*{direction:ltr;}
+.svc-label{position:sticky;top:110px;}
+.svc-label .tag{margin-bottom:14px;}
+.svc-label .h2{margin-bottom:14px;color:var(--navy-2);}
+.svc-label .body-md{margin-bottom:22px;}
+.svc-cards-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;}
+.sd-card{background:var(--white);border-radius:var(--r-md);padding:26px 22px;border:1px solid var(--gray-2);transition:var(--tr);}
+.sd-card:hover{border-color:var(--teal);box-shadow:var(--sh-teal);transform:translateY(-4px);}
+.sd-icon{width:46px;height:46px;border-radius:var(--r-sm);background:var(--teal-glow);border:1px solid var(--teal-border);display:flex;align-items:center;justify-content:center;margin-bottom:14px;}
+.sd-icon i{color:var(--teal);font-size:1.15rem;}
+.sd-card h4{font-family:var(--font-head);font-weight:700;color:var(--navy-2);margin-bottom:7px;font-size:.9rem;}
+.sd-card p{font-size:.81rem;color:var(--text-body);line-height:1.6;margin-bottom:11px;}
+.sd-card ul li{font-size:.77rem;color:var(--gray-5);display:flex;align-items:center;gap:6px;margin-bottom:4px;}
+.sd-card ul li::before{content:'◆';color:var(--teal);font-size:.48rem;}
+.future-section{background:var(--navy);padding:72px 0;}
+.future-badge{display:inline-block;background:linear-gradient(135deg,#7c3aed,#a855f7);color:var(--white);font-size:.63rem;font-weight:700;padding:3px 11px;border-radius:50px;margin-bottom:11px;letter-spacing:1px;}
+.future-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;}
+.fc{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:var(--r-md);padding:30px 26px;transition:var(--tr);}
+.fc:hover{background:rgba(0,180,216,.07);border-color:var(--teal-border);}
+.fc .fc-icon{width:50px;height:50px;border-radius:var(--r-sm);background:rgba(0,180,216,.1);border:1px solid var(--teal-border);display:flex;align-items:center;justify-content:center;margin-bottom:14px;}
+.fc .fc-icon i{color:var(--teal);font-size:1.25rem;}
+.fc h4{font-family:var(--font-head);font-weight:700;color:var(--white);margin-bottom:7px;}
+.fc p{font-size:.84rem;color:rgba(255,255,255,.48);line-height:1.6;margin-bottom:13px;}
+.fc ul li{font-size:.79rem;color:rgba(255,255,255,.38);display:flex;align-items:center;gap:7px;margin-bottom:4px;}
+.fc ul li::before{content:'→';color:var(--teal);font-weight:700;}
+
+/* ================================================================
+   INDUSTRIES PAGE
+================================================================ */
+.ind-section{padding:72px 0;border-bottom:1px solid var(--gray-2);}
+.ind-section:nth-child(even){background:var(--off-white);}
+.ind-section:last-child{border-bottom:none;}
+.ind-inner{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;}
+.ind-inner.flip{direction:rtl;}
+.ind-inner.flip>*{direction:ltr;}
+.ind-num{font-family:var(--font-head);font-size:2.8rem;font-weight:900;color:rgba(0,180,216,.14);line-height:1;margin-bottom:6px;}
+.ind-text .tag{margin-bottom:12px;}
+.ind-text .h2{margin-bottom:12px;}
+.ind-text .body-md{margin-bottom:20px;}
+.ind-uc-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:22px;}
+.ind-uc{background:var(--gray-1);border-radius:var(--r-sm);padding:9px 13px;border-left:3px solid var(--teal);font-size:.79rem;font-weight:600;color:var(--navy-2);}
+.ind-img{border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--sh-lg);}
+.ind-img img{width:100%;height:auto;display:block;}
+.ind-img .no-img{min-height:280px;background:var(--navy);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;border-radius:var(--r-lg);}
+.ind-img .no-img i{font-size:3rem;color:rgba(0,180,216,.3);}
+.ind-img .no-img p{color:rgba(255,255,255,.25);font-size:.8rem;text-align:center;}
+
+/* ================================================================
+   SOLUTIONS PAGE
+================================================================ */
+.dash-section{padding:72px 0;}
+.dash-section:nth-child(even){background:var(--off-white);}
+.dash-inner{display:grid;grid-template-columns:1fr 1.3fr;gap:56px;align-items:center;}
+.dash-inner.flip{direction:rtl;}
+.dash-inner.flip>*{direction:ltr;}
+.dash-text .tag{margin-bottom:12px;}
+.dash-text .h2{margin-bottom:12px;}
+.dash-text .body-md{margin-bottom:22px;}
+.dash-metrics{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:22px;}
+.dm{background:var(--white);border:1px solid var(--gray-2);border-radius:var(--r-sm);padding:13px;border-top:3px solid var(--teal);}
+.dm .val{font-family:var(--font-head);font-size:1.25rem;font-weight:800;color:var(--navy-2);}
+.dm .lbl{font-size:.7rem;color:var(--gray-4);font-weight:500;margin-top:2px;}
+.dash-img{border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--sh-lg);border:1px solid var(--gray-2);}
+.dash-img img{width:100%;height:auto;display:block;}
+.dash-img .no-img{min-height:280px;background:var(--navy);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;}
+.dash-img .no-img i{font-size:3rem;color:rgba(0,180,216,.3);}
+.dash-img .no-img p{color:rgba(255,255,255,.25);font-size:.8rem;text-align:center;}
+.sol-grid-section{background:var(--navy);padding:72px 0;}
+.sol-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+.sgc{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:var(--r-md);overflow:hidden;transition:var(--tr);cursor:pointer;}
+.sgc:hover{border-color:var(--teal-border);transform:translateY(-5px);box-shadow:0 20px 40px rgba(0,0,0,.4);}
+.sgc-img{height:180px;overflow:hidden;background:var(--navy-3);display:flex;align-items:center;justify-content:center;}
+.sgc-img img{width:100%;height:100%;object-fit:cover;transition:var(--tr);}
+.sgc:hover .sgc-img img{transform:scale(1.05);}
+.sgc-img .no-img-icon{font-size:2.2rem;color:rgba(0,180,216,.3);}
+.sgc-body{padding:18px;}
+.sgc-tag{display:inline-block;background:var(--teal-glow);color:var(--teal);font-size:.66rem;font-weight:700;padding:3px 10px;border-radius:50px;margin-bottom:7px;letter-spacing:1px;}
+.sgc h4{font-family:var(--font-head);font-weight:700;color:var(--white);font-size:.9rem;margin-bottom:5px;}
+.sgc p{font-size:.79rem;color:rgba(255,255,255,.42);line-height:1.5;}
+
+/* ================================================================
+   ABOUT PAGE
+================================================================ */
+.about-hero{background:var(--navy);padding:150px 0 80px;position:relative;overflow:hidden;text-align:center;}
+.about-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 55% 50% at 50% 60%,rgba(0,180,216,.09),transparent 65%);pointer-events:none;}
+.about-hero .container{position:relative;z-index:1;}
+.about-story{padding:90px 0;background:var(--white);}
+.about-story-inner{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center;}
+.about-visual{background:var(--navy);border-radius:var(--r-xl);padding:40px;position:relative;overflow:hidden;}
+.about-visual::before{content:'';position:absolute;top:-30%;right:-30%;width:70%;height:70%;background:radial-gradient(circle,rgba(0,180,216,.14),transparent 65%);pointer-events:none;}
+.about-logo-c{text-align:center;position:relative;z-index:1;margin-bottom:28px;}
+.about-logo-c img{width:100px;margin:0 auto 12px;}
+.about-logo-c h3{color:var(--white);font-family:var(--font-head);font-weight:800;font-size:1rem;}
+.about-logo-c span{color:var(--teal);font-size:.7rem;letter-spacing:2px;text-transform:uppercase;}
+.mv-cards{display:grid;grid-template-columns:1fr 1fr;gap:14px;position:relative;z-index:1;}
+.mvc{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:var(--r-md);padding:22px;transition:var(--tr);}
+.mvc:hover{background:rgba(0,180,216,.1);border-color:var(--teal-border);}
+.mvc .mvc-ic{font-size:1.5rem;margin-bottom:9px;}
+.mvc h5{color:var(--white);font-family:var(--font-head);font-weight:700;font-size:.86rem;margin-bottom:5px;}
+.mvc p{color:rgba(255,255,255,.42);font-size:.77rem;line-height:1.5;}
+.mv-section{background:var(--off-white);padding:72px 0;}
+.mv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+.mvb{background:var(--white);border-radius:var(--r-lg);padding:36px 28px;border:1px solid var(--gray-2);text-align:center;transition:var(--tr);}
+.mvb:hover{border-color:var(--teal);box-shadow:var(--sh-teal);transform:translateY(-5px);}
+.mvb .mvb-ic{width:68px;height:68px;border-radius:50%;background:var(--teal-glow);border:2px solid var(--teal-border);display:flex;align-items:center;justify-content:center;margin:0 auto 18px;}
+.mvb .mvb-ic i{font-size:1.7rem;color:var(--teal);}
+.mvb h3{font-family:var(--font-head);font-weight:700;color:var(--navy-2);margin-bottom:10px;}
+.mvb p{font-size:.86rem;color:var(--text-body);line-height:1.7;}
+.values-section{background:var(--navy);padding:72px 0;}
+.val-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:18px;}
+.val{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:var(--r-md);padding:26px 18px;text-align:center;transition:var(--tr);}
+.val:hover{background:rgba(0,180,216,.1);border-color:var(--teal-border);transform:translateY(-4px);}
+.val .v-ic{font-size:1.9rem;margin-bottom:10px;}
+.val h4{color:var(--white);font-family:var(--font-head);font-weight:700;font-size:.86rem;margin-bottom:5px;}
+.val p{color:rgba(255,255,255,.38);font-size:.74rem;line-height:1.5;}
+.exp-section{background:var(--white);padding:72px 0;}
+.exp-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;}
+.exp{background:var(--off-white);border-radius:var(--r-md);padding:26px 18px;border:1px solid var(--gray-2);text-align:center;transition:var(--tr);}
+.exp:hover{border-color:var(--teal);box-shadow:var(--sh-teal);transform:translateY(-4px);}
+.exp .e-ic{font-size:1.9rem;margin-bottom:10px;}
+.exp h4{font-family:var(--font-head);font-weight:700;color:var(--navy-2);font-size:.86rem;margin-bottom:5px;}
+.exp p{font-size:.77rem;color:var(--text-body);line-height:1.5;}
+
+/* ================================================================
+   CONTACT PAGE
+================================================================ */
+.contact-hero{background:var(--navy);padding:150px 0 80px;position:relative;overflow:hidden;}
+.contact-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 55% 50% at 30% 60%,rgba(0,180,216,.1),transparent 60%);pointer-events:none;}
+.contact-hero .container{position:relative;z-index:1;}
+.contact-section{background:var(--off-white);padding:72px 0;}
+.contact-inner{display:grid;grid-template-columns:1fr 1.5fr;gap:56px;}
+.ci-col h3{font-family:var(--font-head);font-size:1.4rem;font-weight:700;color:var(--navy-2);margin-bottom:12px;}
+.ci-col .body-md{margin-bottom:32px;}
+.ci-items{display:flex;flex-direction:column;gap:16px;margin-bottom:32px;}
+.ci-item{display:flex;align-items:center;gap:13px;}
+.ci-icon{width:44px;height:44px;border-radius:var(--r-sm);background:var(--teal-glow);border:1px solid var(--teal-border);display:flex;align-items:center;justify-content:center;}
+.ci-icon i{color:var(--teal);font-size:.95rem;}
+.ci-text strong{display:block;font-size:.76rem;color:var(--gray-4);font-weight:500;margin-bottom:2px;}
+.ci-text a,.ci-text span{color:var(--navy-2);font-weight:600;font-size:.88rem;}
+.soc-row{display:flex;gap:9px;margin-bottom:22px;}
+.soc-btn{width:42px;height:42px;border-radius:var(--r-sm);background:var(--white);border:1px solid var(--gray-2);display:flex;align-items:center;justify-content:center;color:var(--navy-2);transition:var(--tr);}
+.soc-btn:hover{background:var(--navy-2);color:var(--white);border-color:var(--navy-2);transform:translateY(-2px);}
+.wa-link{display:inline-flex;align-items:center;gap:9px;background:#25d366;color:var(--white);padding:11px 24px;border-radius:var(--r-sm);font-weight:700;font-size:.88rem;transition:var(--tr);}
+.wa-link:hover{background:#1da851;transform:translateY(-2px);}
+.cf-card{background:var(--white);border-radius:var(--r-xl);padding:44px 36px;box-shadow:var(--sh-md);border:1px solid var(--gray-2);}
+.cf-card h4{font-family:var(--font-head);font-size:1.15rem;font-weight:700;color:var(--navy-2);margin-bottom:26px;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.fg{margin-bottom:16px;}
+.fg label{display:block;font-size:.78rem;font-weight:700;color:var(--navy-2);margin-bottom:6px;letter-spacing:.2px;}
+.fg input,.fg textarea,.fg select{width:100%;padding:12px 15px;border:1.5px solid var(--gray-2);border-radius:var(--r-sm);font-family:var(--font-body);font-size:.88rem;color:var(--text-dark);background:var(--white);transition:var(--tr);outline:none;}
+.fg input:focus,.fg textarea:focus,.fg select:focus{border-color:var(--teal);box-shadow:0 0 0 3px rgba(0,180,216,.1);}
+.fg textarea{resize:vertical;min-height:115px;}
+.form-submit{width:100%;padding:15px;font-size:.93rem;justify-content:center;}
+
+/* ================================================================
+   FOOTER
+================================================================ */
+footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.06);padding:64px 0 0;}
+.footer-inner{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;padding-bottom:48px;}
+.fb .fb-logo{display:flex;align-items:center;gap:11px;margin-bottom:16px;}
+.fb .fbl-img{width:42px;height:42px;border-radius:9px;overflow:hidden;background:var(--white);display:flex;align-items:center;justify-content:center;}
+.fb .fbl-img img{width:38px;height:38px;object-fit:contain;}
+.fb .fb-name{font-family:var(--font-head);font-size:.86rem;font-weight:800;color:var(--white);}
+.fb .fb-tag{font-size:.58rem;color:var(--teal);font-weight:600;letter-spacing:1.5px;text-transform:uppercase;}
+.fb p{font-size:.81rem;color:rgba(255,255,255,.35);line-height:1.7;max-width:270px;margin-bottom:20px;}
+.f-social{display:flex;gap:9px;}
+.fs-btn{width:36px;height:36px;border-radius:var(--r-sm);background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.45);transition:var(--tr);}
+.fs-btn:hover{background:var(--teal);color:var(--white);border-color:var(--teal);}
+.fc-col h5{font-family:var(--font-head);font-size:.86rem;font-weight:700;color:var(--white);margin-bottom:18px;}
+.fc-col ul li{margin-bottom:9px;}
+.fc-col ul li a,.fc-col ul li span{color:rgba(255,255,255,.35);font-size:.81rem;transition:var(--tr);cursor:pointer;}
+.fc-col ul li a:hover,.fc-col ul li span:hover{color:var(--teal);}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.06);padding:22px 0;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+.footer-bottom p{font-size:.78rem;color:rgba(255,255,255,.26);}
+.fb-links{display:flex;gap:22px;}
+.fb-links a{font-size:.78rem;color:rgba(255,255,255,.26);transition:var(--tr);}
+.fb-links a:hover{color:var(--teal);}
+
+/* SCROLL TOP */
+#scrollTop{position:fixed;bottom:28px;right:28px;z-index:9999;width:44px;height:44px;border-radius:50%;background:var(--teal);color:var(--white);border:none;cursor:pointer;font-size:.95rem;display:none;align-items:center;justify-content:center;box-shadow:var(--sh-teal);transition:var(--tr);}
+#scrollTop.show{display:flex;}
+#scrollTop:hover{background:var(--teal-2);transform:translateY(-2px);}
+
+/* ================================================================
+   RESPONSIVE
+================================================================ */
+@media(max-width:1100px){
+  .ind-grid{grid-template-columns:repeat(3,1fr);}
+  .val-grid{grid-template-columns:repeat(3,1fr);}
+  .footer-inner{grid-template-columns:1fr 1fr;}
+  .exp-grid{grid-template-columns:repeat(2,1fr);}
+}
+@media(max-width:900px){
+  .hero-inner,.why-inner,.about-story-inner,.contact-inner,
+  .sol-showcase,.svc-section-inner,.ind-inner,.dash-inner{grid-template-columns:1fr;gap:36px;}
+  .svc-section-inner.rev,.ind-inner.flip,.dash-inner.flip{direction:ltr;}
+  .hero-visual{display:none;}
+  .svc-grid,.sol-grid,.future-grid{grid-template-columns:1fr 1fr;}
+  .mv-grid{grid-template-columns:1fr;}
+  .svc-cards-grid{grid-template-columns:1fr;}
+  .ind-uc-grid{grid-template-columns:1fr;}
+  .dash-metrics{grid-template-columns:1fr 1fr;}
+  .mv-cards{grid-template-columns:1fr 1fr;}
+  .svc-label{position:static;}
+}
+@media(max-width:768px){
+  .nav-links{display:none !important;}
+  .nav-cta-btn{display:none !important;}
+  .hamburger{display:flex !important;}
+  .section-pad{padding:64px 0;}
+  .svc-grid,.sol-grid,.exp-grid,.future-grid{grid-template-columns:1fr;}
+  .ind-grid{grid-template-columns:repeat(2,1fr);}
+  .form-row{grid-template-columns:1fr;}
+  .footer-inner{grid-template-columns:1fr;}
+  .footer-bottom{flex-direction:column;text-align:center;}
+  .val-grid{grid-template-columns:repeat(2,1fr);}
+  .hero-stats{flex-direction:column;}
+  .h-stat{border-right:none;border-bottom:1px solid rgba(255,255,255,.08);}
+  .h-stat:last-child{border-bottom:none;}
+}
+@media(max-width:480px){
+  .hero-btns{flex-direction:column;}
+  .cta-btns{flex-direction:column;align-items:center;}
+  .ind-grid{grid-template-columns:1fr 1fr;}
+  .mv-cards{grid-template-columns:1fr;}
+  .val-grid{grid-template-columns:1fr 1fr;}
+  .cf-card{padding:26px 18px;}
+}
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     NAVIGATION
+============================================================ -->
+<nav id="navbar">
+  <div class="nav-wrap">
+    <div class="nav-logo" onclick="showPage('home')">
+      <div class="logo-img-box">
+        <!-- FIX #1: relative path -->
+        <img src="assets/logo.png" alt="LTSGFH Logo"
+          onerror="this.style.display='none';this.parentElement.innerHTML='<span style=\'font-family:Poppins;font-weight:900;font-size:.85rem;color:#0a1628;\'>IF</span>'"/>
+      </div>
+      <div class="logo-txt">
+        <span class="logo-name">InsightForge Intelligence</span>
+        <span class="logo-tag">LTSGFH · Transforming Data into Intelligence</span>
+      </div>
+    </div>
+
+    <ul class="nav-links" id="navLinks">
+      <li><span class="nav-item active" data-page="home"       onclick="showPage('home')">Home</span></li>
+      <li><span class="nav-item"        data-page="services"   onclick="showPage('services')">Services</span></li>
+      <li><span class="nav-item"        data-page="industries" onclick="showPage('industries')">Industries</span></li>
+      <li><span class="nav-item"        data-page="solutions"  onclick="showPage('solutions')">Solutions</span></li>
+      <li><span class="nav-item"        data-page="about"      onclick="showPage('about')">About</span></li>
+      <li><span class="nav-item"        data-page="contact"    onclick="showPage('contact')">Contact</span></li>
+    </ul>
+
+    <span class="btn btn-primary nav-cta-btn" onclick="showPage('contact')">
+      <i class="fas fa-calendar-check"></i> Schedule Consultation
+    </span>
+
+    <button class="hamburger" id="hamburger" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="mob-menu" id="mobMenu">
+  <span class="mob-item" onclick="showPage('home');closeMob()">Home</span>
+  <span class="mob-item" onclick="showPage('services');closeMob()">Services</span>
+  <span class="mob-item" onclick="showPage('industries');closeMob()">Industries</span>
+  <span class="mob-item" onclick="showPage('solutions');closeMob()">Solutions</span>
+  <span class="mob-item" onclick="showPage('about');closeMob()">About</span>
+  <span class="mob-item" onclick="showPage('contact');closeMob()">Contact</span>
+</div>
+
+<!-- ============================================================
+     PAGE: HOME
+============================================================ -->
+<div class="page active" id="page-home">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-grid"></div>
+    <div class="container">
+      <div class="hero-inner">
+
+        <div class="hero-left">
+          <div class="hero-eyebrow">
+            <div class="pulse-dot"></div>
+            <span>Business Intelligence & Analytics Consulting</span>
+          </div>
+
+          <h1 class="h1 hero-title">
+            <span class="white">Turn Data Into</span><br/>
+            <span class="grad">Decisions.</span><br/>
+            <span class="white">Decisions Into</span><br/>
+            <span class="grad">Growth.</span>
+          </h1>
+
+          <!-- FIX #2: updated hero subtitle -->
+          <p class="hero-sub">
+            Helping organizations unlock business intelligence through analytics,
+            dashboards, reporting, automation, and industry-specific solutions.
+          </p>
+
+          <div class="hero-btns">
+            <span class="btn btn-primary btn-lg" onclick="showPage('contact')">
+              <i class="fas fa-calendar-check"></i> Schedule Consultation
+            </span>
+            <span class="btn btn-outline-white btn-lg" onclick="showPage('solutions')">
+              <i class="fas fa-chart-bar"></i> View Solutions
+            </span>
+          </div>
+
+          <!-- FIX #4: updated stats labels -->
+          <div class="hero-stats">
+            <div class="h-stat">
+              <span class="num">11</span>
+              <span class="lbl">Industry Solutions</span>
+            </div>
+            <div class="h-stat">
+              <span class="num"><i class="fas fa-chart-bar" style="font-size:1.1rem;"></i></span>
+              <span class="lbl">Power BI Expertise</span>
+            </div>
+            <div class="h-stat">
+              <span class="num"><i class="fas fa-display" style="font-size:1.1rem;"></i></span>
+              <span class="lbl">Custom Dashboards</span>
+            </div>
+            <div class="h-stat">
+              <span class="num"><i class="fas fa-database" style="font-size:1.1rem;"></i></span>
+              <span class="lbl">Analytics Driven</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- FIX #8: ROTATING CAROUSEL -->
+        <div class="hero-visual">
+          <div class="float-badge top-right">
+            <i class="fas fa-arrow-trend-up"></i>
+            <span>OEE <span class="badge-up">+6.3%</span></span>
+          </div>
+
+          <div class="carousel-wrap" id="heroCarousel">
+            <!-- Slide 1: Manufacturing -->
+            <div class="carousel-slide active">
+              <img src="assets/dashboard-manufacturing.png" alt="Manufacturing Dashboard"
+                onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+              <div class="no-img" style="display:none;">
+                <i class="fas fa-industry"></i>
+                <p>Manufacturing Intelligence</p>
+              </div>
+            </div>
+            <!-- Slide 2: Banking -->
+            <div class="carousel-slide">
+              <img src="assets/dashboard-banking.png" alt="Banking Dashboard"
+                onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+              <div class="no-img" style="display:none;">
+                <i class="fas fa-landmark"></i>
+                <p>Banking Analytics</p>
+              </div>
+            </div>
+            <!-- Slide 3: Healthcare -->
+            <div class="carousel-slide">
+              <img src="assets/dashboard-healthcare.png" alt="Healthcare Dashboard"
+                onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+              <div class="no-img" style="display:none;">
+                <i class="fas fa-hospital"></i>
+                <p>Healthcare Analytics</p>
+              </div>
+            </div>
+            <!-- Slide 4: Logistics -->
+            <div class="carousel-slide">
+              <img src="assets/dashboard-logistics.png" alt="Logistics Dashboard"
+                onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+              <div class="no-img" style="display:none;">
+                <i class="fas fa-truck"></i>
+                <p>Logistics Analytics</p>
+              </div>
+            </div>
+
+            <!-- Label + dots -->
+            <div class="carousel-label">
+              <span id="carouselLbl">Manufacturing Intelligence</span>
+              <div class="carousel-dots">
+                <button class="cdot active" onclick="goSlide(0)"></button>
+                <button class="cdot"        onclick="goSlide(1)"></button>
+                <button class="cdot"        onclick="goSlide(2)"></button>
+                <button class="cdot"        onclick="goSlide(3)"></button>
+              </div>
+            </div>
+          </div>
+
+          <div class="float-badge bot-left">
+            <i class="fas fa-shield-check"></i>
+            <span>Data Accuracy 99.8%</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CLIENTS STRIP -->
+  <div class="clients-strip">
+    <div class="container">
+      <div class="clients-inner">
+        <div class="c-badge"><i class="fas fa-industry"></i><span>Manufacturing</span></div>
+        <div class="c-badge"><i class="fas fa-hospital"></i><span>Healthcare</span></div>
+        <div class="c-badge"><i class="fas fa-landmark"></i><span>Banking</span></div>
+        <div class="c-badge"><i class="fas fa-chart-line"></i><span>Finance</span></div>
+        <div class="c-badge"><i class="fas fa-building"></i><span>Real Estate</span></div>
+        <div class="c-badge"><i class="fas fa-shopping-cart"></i><span>E-Commerce</span></div>
+        <div class="c-badge"><i class="fas fa-truck"></i><span>Logistics</span></div>
+        <div class="c-badge"><i class="fas fa-users"></i><span>HR Analytics</span></div>
+        <div class="c-badge"><i class="fas fa-chart-candlestick"></i><span>Trading</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SERVICES PREVIEW — FIX #7: reordered 1→5 -->
+  <section class="services-preview section-pad">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="tag"><i class="fas fa-layer-group"></i> Our Services</div>
+        <h2 class="h2">End-to-End <span class="teal">Analytics Solutions</span></h2>
+        <p class="body-lg">From raw data to strategic intelligence — covering every layer of your analytics journey.</p>
+      </div>
+      <div class="svc-grid">
+
+        <!-- 1. Business Intelligence -->
+        <div class="svc-card reveal">
+          <div class="svc-icon"><i class="fas fa-chart-bar"></i></div>
+          <h4 class="h4">Business Intelligence</h4>
+          <p>Enterprise Power BI dashboards, KPI solutions, and executive reporting that transform data into strategic clarity.</p>
+          <ul class="svc-list">
+            <li>Power BI Dashboard Development</li>
+            <li>KPI Dashboard Solutions</li>
+            <li>Executive Reporting</li>
+            <li>Interactive Data Visualization</li>
+          </ul>
+        </div>
+
+        <!-- 2. Data Analytics -->
+        <div class="svc-card reveal">
+          <div class="svc-icon"><i class="fas fa-database"></i></div>
+          <h4 class="h4">Data Analytics</h4>
+          <p>Advanced SQL analysis, data transformation, and performance analytics that uncover actionable insights.</p>
+          <ul class="svc-list">
+            <li>SQL Data Analysis</li>
+            <li>Data Transformation</li>
+            <li>Trend Analysis</li>
+            <li>Performance Analytics</li>
+          </ul>
+        </div>
+
+        <!-- 3. Automation -->
+        <div class="svc-card reveal">
+          <div class="svc-icon"><i class="fas fa-robot"></i></div>
+          <h4 class="h4">Automation</h4>
+          <p>Eliminate manual processes with Excel automation, reporting automation, and workflow optimization.</p>
+          <ul class="svc-list">
+            <li>Excel Automation</li>
+            <li>Reporting Automation</li>
+            <li>Workflow Automation</li>
+            <li>Data Integration</li>
+          </ul>
+        </div>
+
+        <!-- 4. Trading Analytics — FIX #3 -->
+        <div class="svc-card reveal">
+          <div class="svc-icon"><i class="fas fa-chart-candlestick"></i></div>
+          <h4 class="h4">Trading Analytics</h4>
+          <!-- FIX #3: updated wording -->
+          <p>Professional trading analytics, strategy performance dashboards, risk monitoring, portfolio analytics, and trade performance reporting.</p>
+          <ul class="svc-list">
+            <li>Strategy Performance Dashboards</li>
+            <li>Risk Monitoring Analytics</li>
+            <li>Portfolio Analytics</li>
+            <li>Trade Performance Reporting</li>
+          </ul>
+        </div>
+
+        <!-- 5. AI Trading Bots -->
+        <div class="svc-card reveal">
+          <div class="svc-icon"><i class="fas fa-microchip"></i></div>
+          <h4 class="h4">AI Trading Bots</h4>
+          <p>Strategy-based automated trading systems with risk management logic, backtesting, and performance monitoring.</p>
+          <ul class="svc-list">
+            <li>Strategy-Based Trading Bots</li>
+            <li>Automated Trade Execution</li>
+            <li>Risk Management Logic</li>
+            <li>Backtesting Analytics</li>
+          </ul>
+        </div>
+
+        <!-- CTA card -->
+        <div class="svc-card reveal" style="background:var(--navy);border-color:var(--teal-border);cursor:pointer;" onclick="showPage('services')">
+          <div class="svc-icon" style="background:rgba(0,180,216,.15);"><i class="fas fa-arrow-right" style="color:var(--teal);"></i></div>
+          <h4 class="h4" style="color:var(--white);">Explore All Services</h4>
+          <p style="color:rgba(255,255,255,.48);">View our complete service catalog with detailed capabilities and methodologies.</p>
+          <span class="btn btn-outline-white btn-sm" style="margin-top:14px;">View All Services <i class="fas fa-arrow-right"></i></span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- INDUSTRIES PREVIEW -->
+  <section class="ind-preview section-pad">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="tag" style="background:rgba(0,180,216,.1);"><i class="fas fa-building"></i> Industries</div>
+        <h2 class="h2 white">Intelligence for <span class="teal">Every Industry</span></h2>
+        <p class="body-lg" style="color:rgba(255,255,255,.55);">Sector-specific analytics solutions tailored to the unique data challenges of 11 industries.</p>
+      </div>
+      <div class="ind-grid">
+        <div class="ind-chip reveal" onclick="showPage('industries')"><span class="ic">⚙️</span><span>Operations & Maintenance</span></div>
+        <div class="ind-chip reveal" onclick="showPage('industries')"><span class="ic">🏥</span><span>Healthcare Analytics</span></div>
+        <div class="ind-chip reveal" onclick="showPage('industries')"><span class="ic">🏦</span><span>Banking Analytics</span></div>
+        <div class="ind-chip reveal" onclick="showPage('industries')"><span class="ic">💰</span><span>Financial Analytics</span></div>
+        <div class="ind-chip reveal" onclick="showPage('industries')"><span class="ic">🏢</span><span>Real Estate Analytics</span></div>
+        <div class="ind-chip reveal" onclick="showPage('industries')"><span class="ic">🛒</span><span>E-Commerce Analytics</span></div>
+        <div class="ind-chip reveal" onclick="showPage('industries')"><span class="ic">📈</span><span>Sales Analytics</span></div>
+        <div class="ind-chip reveal" onclick="showPage('industries')"><span class="ic">🏭</span><span>Manufacturing Analytics</span></div>
+        <div class="ind-chip reveal" onclick="showPage('industries')"><span class="ic">🚚</span><span>Logistics & Supply Chain</span></div>
+        <div class="ind-chip reveal" onclick="showPage('industries')"><span class="ic">👥</span><span>HR Analytics</span></div>
+        <div class="ind-chip reveal" onclick="showPage('industries')"><span class="ic">📊</span><span>Trading Analytics</span></div>
+        <div class="ind-chip reveal" onclick="showPage('industries')" style="background:rgba(0,180,216,.1);border-color:var(--teal-border);">
+          <span class="ic">→</span><span style="color:var(--teal);">Explore All Industries</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY CHOOSE US -->
+  <section class="why-section section-pad">
+    <div class="container">
+      <div class="why-inner">
+        <div class="reveal-l">
+          <div class="tag"><i class="fas fa-star"></i> Why Choose Us</div>
+          <h2 class="h2">Your Strategic <span class="teal">Intelligence Partner</span></h2>
+          <p class="body-lg">We build decision-making systems that transform how your organization operates, competes, and grows — through analytics built specifically for your industry.</p>
+          <div class="why-points">
+            <div class="why-point">
+              <div class="wp-icon"><i class="fas fa-chart-bar"></i></div>
+              <div><h5>Power BI Expertise</h5><p>Deep Power BI, SQL, and analytics expertise across 11 industries with a proven delivery methodology.</p></div>
+            </div>
+            <div class="why-point">
+              <div class="wp-icon"><i class="fas fa-bullseye"></i></div>
+              <div><h5>Industry-Specific Solutions</h5><p>Every dashboard is purpose-built for its industry — no generic templates, no copy-paste solutions.</p></div>
+            </div>
+            <div class="why-point">
+              <div class="wp-icon"><i class="fas fa-shield-check"></i></div>
+              <div><h5>Accuracy & Integrity</h5><p>Rigorous data validation and quality standards ensure your insights are always reliable and trustworthy.</p></div>
+            </div>
+            <div class="why-point">
+              <div class="wp-icon"><i class="fas fa-rocket"></i></div>
+              <div><h5>Trading & AI Analytics</h5><p>Advanced trading analytics and AI automation capabilities built for the modern data landscape.</p></div>
+            </div>
+          </div>
+        </div>
+        <div class="why-visual reveal-r">
+          <div class="proc-step">
+            <div class="proc-num">01</div>
+            <div><h5>Data Discovery & Audit</h5><p>We assess your data sources, quality, and business objectives to build a solid foundation.</p></div>
+          </div>
+          <div class="proc-step">
+            <div class="proc-num">02</div>
+            <div><h5>Strategy & Architecture</h5><p>We design a tailored analytics architecture aligned to your industry and strategic goals.</p></div>
+          </div>
+          <div class="proc-step">
+            <div class="proc-num">03</div>
+            <div><h5>Build & Automate</h5><p>We develop dashboards, automate reporting, and deploy analytics workflows with precision.</p></div>
+          </div>
+          <div class="proc-step">
+            <div class="proc-num">04</div>
+            <div><h5>Deliver & Optimize</h5><p>We deliver insights, train your team, and continuously optimize for maximum business impact.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOLUTIONS PREVIEW — FIX #6: uses real dashboard image -->
+  <section class="solutions-preview section-pad">
+    <div class="container">
+      <div class="sol-showcase">
+        <div class="reveal-l">
+          <div class="tag"><i class="fas fa-display"></i> Dashboard Solutions</div>
+          <h2 class="h2">Real Dashboards. <span class="teal">Real Impact.</span></h2>
+          <p class="body-lg">Every dashboard is designed specifically for its industry — unique layouts, industry-specific metrics, and executive-level storytelling.</p>
+          <div class="sol-features">
+            <div class="sol-feat"><i class="fas fa-check-circle"></i><span>11 Industry-Specific Dashboard Designs</span></div>
+            <div class="sol-feat"><i class="fas fa-check-circle"></i><span>Power BI Design Standards</span></div>
+            <div class="sol-feat"><i class="fas fa-check-circle"></i><span>Executive Reporting Layouts</span></div>
+            <div class="sol-feat"><i class="fas fa-check-circle"></i><span>Premium KPI Cards & Visualizations</span></div>
+            <div class="sol-feat"><i class="fas fa-check-circle"></i><span>Drill-Through & Rich Tooltip Concepts</span></div>
+          </div>
+          <span class="btn btn-primary" onclick="showPage('solutions')"><i class="fas fa-chart-bar"></i> View All Dashboards</span>
+        </div>
+        <div class="sol-img reveal-r">
+          <img src="assets/dashboard-logistics.png" alt="Logistics Performance Dashboard"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+          <div class="no-img" style="display:none;">
+            <i class="fas fa-truck"></i>
+            <p>Logistics Dashboard Preview</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA STRIP -->
+  <div class="cta-strip">
+    <div class="container">
+      <div class="cta-inner reveal">
+        <h2 class="h2">Ready to Transform Your Data Into Strategy?</h2>
+        <p>Schedule a free consultation and discover how InsightForge Intelligence can unlock the power of your data.</p>
+        <div class="cta-btns">
+          <span class="btn btn-dark btn-lg" onclick="showPage('contact')"><i class="fas fa-calendar-check"></i> Schedule Free Consultation</span>
+          <span class="btn btn-outline-white btn-lg" onclick="showPage('solutions')"><i class="fas fa-chart-bar"></i> View Our Work</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER — FIX #5: dynamic year -->
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div class="fb">
+          <div class="fb-logo">
+            <div class="fbl-img"><img src="assets/logo.png" alt="Logo" onerror="this.style.display='none';this.parentElement.innerHTML='<span style=\'font-family:Poppins;font-weight:900;font-size:.85rem;color:#0a1628;\'>IF</span>'"/></div>
+            <div><div class="fb-name">InsightForge Intelligence</div><div class="fb-tag">LTSGFH</div></div>
+          </div>
+          <p>A data analytics and business intelligence firm helping organizations across 11 industries transform raw data into strategic intelligence.</p>
+          <div class="f-social">
+            <a href="#" class="fs-btn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="mailto:info@insightforge.ai" class="fs-btn"><i class="fas fa-envelope"></i></a>
+            <a href="https://wa.me/1234567890" class="fs-btn"><i class="fab fa-whatsapp"></i></a>
+          </div>
+        </div>
+        <div class="fc-col"><h5>Services</h5><ul>
+          <li><span onclick="showPage('services')">Business Intelligence</span></li>
+          <li><span onclick="showPage('services')">Data Analytics</span></li>
+          <li><span onclick="showPage('services')">Automation</span></li>
+          <li><span onclick="showPage('services')">Trading Analytics</span></li>
+          <li><span onclick="showPage('services')">AI Trading Bots</span></li>
+        </ul></div>
+        <div class="fc-col"><h5>Industries</h5><ul>
+          <li><span onclick="showPage('industries')">Operations & Maintenance</span></li>
+          <li><span onclick="showPage('industries')">Healthcare Analytics</span></li>
+          <li><span onclick="showPage('industries')">Banking Analytics</span></li>
+          <li><span onclick="showPage('industries')">Manufacturing</span></li>
+          <li><span onclick="showPage('industries')">Trading Analytics</span></li>
+        </ul></div>
+        <div class="fc-col"><h5>Company</h5><ul>
+          <li><span onclick="showPage('about')">About Us</span></li>
+          <li><span onclick="showPage('solutions')">Solutions</span></li>
+          <li><span onclick="showPage('contact')">Contact Us</span></li>
+          <li><a href="#">Privacy Policy</a></li>
+        </ul></div>
+      </div>
+      <div class="footer-bottom">
+        <!-- FIX #5: dynamic year via JS -->
+        <p>© <span id="yr"></span> LTSGFH InsightForge Intelligence. All rights reserved.</p>
+        <div class="fb-links"><a href="#">Privacy Policy</a><a href="#">Terms of Service</a></div>
+      </div>
+    </div>
+  </footer>
+</div><!-- END HOME -->
+
+<!-- ============================================================
+     PAGE: SERVICES
+============================================================ -->
+<div class="page" id="page-services">
+  <section class="page-hero">
+    <div class="container">
+      <div class="tag"><i class="fas fa-layer-group"></i> Our Services</div>
+      <h1 class="h1 white" style="margin-bottom:18px;">Complete Analytics <span class="teal">Service Portfolio</span></h1>
+      <p class="body-lg">From Business Intelligence and Data Analytics to Automation, Trading Analytics, and AI Trading Bots — end-to-end analytics solutions built for real business performance.</p>
+    </div>
+  </section>
+
+  <!-- 1. BUSINESS INTELLIGENCE -->
+  <section style="padding:72px 0;background:var(--white);">
+    <div class="container">
+      <div class="svc-section-inner">
+        <div class="svc-label reveal-l">
+          <div class="tag"><i class="fas fa-chart-bar"></i> Service 01</div>
+          <h2 class="h2">Business <span class="teal">Intelligence</span></h2>
+          <p class="body-md">Enterprise-grade Power BI dashboards, KPI solutions, and executive reporting that transform raw data into strategic clarity for leadership teams.</p>
+          <span class="btn btn-primary" style="margin-top:18px;" onclick="showPage('contact')"><i class="fas fa-calendar-check"></i> Get Started</span>
+        </div>
+        <div class="svc-cards-grid reveal-r">
+          <div class="sd-card"><div class="sd-icon"><i class="fas fa-chart-bar"></i></div><h4>Power BI Dashboard Development</h4><p>Custom enterprise dashboards with real-time connectivity and multi-source integration.</p><ul><li>Custom Dashboard Design</li><li>Real-Time Data Connectivity</li><li>Multi-Source Integration</li><li>Mobile-Optimized Views</li></ul></div>
+          <div class="sd-card"><div class="sd-icon"><i class="fas fa-gauge-high"></i></div><h4>KPI Dashboard Solutions</h4><p>Purpose-built KPI tracking systems that give decision-makers instant visibility into what matters most.</p><ul><li>KPI Framework Design</li><li>Threshold & Alert Systems</li><li>Drill-Down Analytics</li><li>Benchmarking & Targets</li></ul></div>
+          <div class="sd-card"><div class="sd-icon"><i class="fas fa-file-chart-column"></i></div><h4>Executive Reporting</h4><p>Board-ready reports and leadership dashboards that communicate performance with clarity.</p><ul><li>C-Suite Report Design</li><li>Automated Report Delivery</li><li>Narrative Analytics</li><li>Strategic Scorecards</li></ul></div>
+          <div class="sd-card"><div class="sd-icon"><i class="fas fa-eye"></i></div><h4>Interactive Data Visualization</h4><p>Rich, interactive visualizations that bring complex data to life through intuitive experiences.</p><ul><li>Custom Visual Development</li><li>Drill-Through Reports</li><li>Rich Tooltip Design</li><li>Storytelling Layouts</li></ul></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. DATA ANALYTICS -->
+  <section style="padding:72px 0;background:var(--off-white);">
+    <div class="container">
+      <div class="svc-section-inner rev">
+        <div class="svc-label reveal-r">
+          <div class="tag"><i class="fas fa-database"></i> Service 02</div>
+          <h2 class="h2">Data <span class="teal">Analytics</span></h2>
+          <p class="body-md">Advanced SQL analysis, data transformation, trend analysis, and performance analytics that uncover the insights your business needs to grow.</p>
+          <span class="btn btn-primary" style="margin-top:18px;" onclick="showPage('contact')"><i class="fas fa-calendar-check"></i> Get Started</span>
+        </div>
+        <div class="svc-cards-grid reveal-l">
+          <div class="sd-card"><div class="sd-icon"><i class="fas fa-database"></i></div><h4>SQL Data Analysis</h4><p>Advanced SQL querying and data modeling to extract meaningful patterns from complex datasets.</p><ul><li>Complex Query Optimization</li><li>Data Modeling & Schema Design</li><li>Cross-Database Integration</li><li>Performance Tuning</li></ul></div>
+          <div class="sd-card"><div class="sd-icon"><i class="fas fa-arrows-rotate"></i></div><h4>Data Transformation</h4><p>Clean, transform, and structure your data for reliable analytics and trusted insights.</p><ul><li>ETL Pipeline Development</li><li>Data Cleansing & Validation</li><li>Power Query Automation</li><li>Data Warehouse Design</li></ul></div>
+          <div class="sd-card"><div class="sd-icon"><i class="fas fa-chart-line"></i></div><h4>Trend Analysis</h4><p>Uncover trends, forecast performance, and identify growth opportunities through advanced analytics.</p><ul><li>Time-Series Analysis</li><li>Predictive Trend Modeling</li><li>Seasonal Pattern Detection</li><li>Forecasting Models</li></ul></div>
+          <div class="sd-card"><div class="sd-icon"><i class="fas fa-tachometer-alt"></i></div><h4>Performance Analytics</h4><p>Comprehensive performance monitoring, benchmarking, and root cause analysis.</p><ul><li>Performance Benchmarking</li><li>Root Cause Analysis</li><li>Business Insights Reports</li><li>Variance Analysis</li></ul></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. AUTOMATION -->
+  <section style="padding:72px 0;background:var(--white);">
+    <div class="container">
+      <div class="svc-section-inner">
+        <div class="svc-label reveal-l">
+          <div class="tag"><i class="fas fa-robot"></i> Service 03</div>
+          <h2 class="h2">Reporting <span class="teal">Automation</span></h2>
+          <p class="body-md">Eliminate manual processes with Excel automation, reporting automation, workflow optimization, and intelligent data integration solutions.</p>
+          <span class="btn btn-primary" style="margin-top:18px;" onclick="showPage('contact')"><i class="fas fa-calendar-check"></i> Get Started</span>
+        </div>
+        <div class="svc-cards-grid reveal-r">
+          <div class="sd-card"><div class="sd-icon"><i class="fas fa-file-excel"></i></div><h4>Excel Automation</h4><p>Transform manual Excel processes into automated, error-free workflows using VBA and Power Query.</p><ul><li>VBA Macro Development</li><li>Power Query Automation</li><li>Dynamic Report Templates</li><li>Data Validation Systems</li></ul></div>
+          <div class="sd-card"><div class="sd-icon"><i class="fas fa-clock-rotate-left"></i></div><h4>Reporting Automation</h4><p>Scheduled, automated delivery of insights to stakeholders — eliminating manual reporting entirely.</p><ul><li>Scheduled Report Generation</li><li>Email Report Distribution</li><li>Power Automate Workflows</li><li>Multi-Format Export</li></ul></div>
+          <div class="sd-card"><div class="sd-icon"><i class="fas fa-sitemap"></i></div><h4>Workflow Automation</h4><p>Streamline business processes by identifying bottlenecks and automating repetitive tasks.</p><ul><li>Process Mapping & Analysis</li><li>Bottleneck Identification</li><li>Automation Implementation</li><li>Efficiency Measurement</li></ul></div>
+          <div class="sd-card"><div class="sd-icon"><i class="fas fa-plug"></i></div><h4>Data Integration</h4><p>Connect disparate data sources into unified, reliable pipelines that power your analytics ecosystem.</p><ul><li>API Data Connections</li><li>Multi-Source Integration</li><li>Real-Time Data Sync</li><li>Data Quality Monitoring</li></ul></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 & 5. TRADING + AI BOTS -->
+  <section class="future-section">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="tag" style="background:rgba(139,92,246,.15);color:#a855f7;border-color:rgba(139,92,246,.3);"><i class="fas fa-rocket"></i> Advanced Services</div>
+        <h2 class="h2 white">Trading Analytics & <span class="teal">AI Solutions</span></h2>
+        <!-- FIX #3: updated description -->
+        <p class="body-lg" style="color:rgba(255,255,255,.55);">Professional trading analytics, strategy performance dashboards, risk monitoring, portfolio analytics, and trade performance reporting — plus AI-powered trading automation.</p>
+      </div>
+      <div class="future-grid">
+        <div class="fc reveal"><div class="future-badge">TRADING ANALYTICS</div><div class="fc-icon"><i class="fas fa-chart-candlestick"></i></div><h4>Strategy Performance Dashboards</h4><p>Comprehensive dashboards for trading strategy evaluation, performance attribution, and optimization.</p><ul><li>Strategy Backtesting Analytics</li><li>Performance Attribution</li><li>Drawdown Analysis</li><li>Sharpe & Risk-Adjusted Returns</li></ul></div>
+        <div class="fc reveal"><div class="future-badge">TRADING ANALYTICS</div><div class="fc-icon"><i class="fas fa-display"></i></div><h4>Trade Performance Reporting</h4><p>Real-time trade performance dashboards with P&L tracking, position monitoring, and journal analytics.</p><ul><li>Real-Time P&L Tracking</li><li>Position & Exposure Monitoring</li><li>Trade Journal Analytics</li><li>Multi-Strategy Comparison</li></ul></div>
+        <div class="fc reveal"><div class="future-badge">TRADING ANALYTICS</div><div class="fc-icon"><i class="fas fa-shield-halved"></i></div><h4>Risk Monitoring Analytics</h4><p>Sophisticated risk monitoring, exposure analysis, and portfolio risk management dashboards.</p><ul><li>VaR & Risk Exposure Dashboards</li><li>Portfolio Risk Monitoring</li><li>Correlation Analysis</li><li>Stress Testing Analytics</li></ul></div>
+        <div class="fc reveal"><div class="future-badge">AI TRADING BOTS</div><div class="fc-icon"><i class="fas fa-microchip"></i></div><h4>Strategy-Based Trading Bots</h4><p>Automated trading systems built on proven strategies with intelligent risk management and real-time execution.</p><ul><li>Strategy-Based Automation</li><li>Automated Trade Execution</li><li>Risk Management Logic</li><li>Backtesting & Optimization</li></ul></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="cta-strip"><div class="container"><div class="cta-inner reveal"><h2 class="h2">Ready to Get Started?</h2><p>Schedule a free consultation and let's build the right analytics solution for your organization.</p><div class="cta-btns"><span class="btn btn-dark btn-lg" onclick="showPage('contact')"><i class="fas fa-calendar-check"></i> Schedule Consultation</span><span class="btn btn-outline-white btn-lg" onclick="showPage('solutions')"><i class="fas fa-chart-bar"></i> View Solutions</span></div></div></div></div>
+
+  <footer><div class="container"><div class="footer-inner">
+    <div class="fb"><div class="fb-logo"><div class="fbl-img"><img src="assets/logo.png" alt="Logo" onerror="this.style.display='none';this.parentElement.innerHTML='<span style=\'font-family:Poppins;font-weight:900;font-size:.85rem;color:#0a1628;\'>IF</span>'"/></div><div><div class="fb-name">InsightForge Intelligence</div><div class="fb-tag">LTSGFH</div></div></div><p>Analytics consulting across 11 industries.</p><div class="f-social"><a href="#" class="fs-btn"><i class="fab fa-linkedin-in"></i></a><a href="mailto:info@insightforge.ai" class="fs-btn"><i class="fas fa-envelope"></i></a><a href="https://wa.me/1234567890" class="fs-btn"><i class="fab fa-whatsapp"></i></a></div></div>
+    <div class="fc-col"><h5>Services</h5><ul><li><span onclick="showPage('services')">Business Intelligence</span></li><li><span onclick="showPage('services')">Data Analytics</span></li><li><span onclick="showPage('services')">Automation</span></li><li><span onclick="showPage('services')">Trading Analytics</span></li><li><span onclick="showPage('services')">AI Trading Bots</span></li></ul></div>
+    <div class="fc-col"><h5>Pages</h5><ul><li><span onclick="showPage('home')">Home</span></li><li><span onclick="showPage('industries')">Industries</span></li><li><span onclick="showPage('solutions')">Solutions</span></li><li><span onclick="showPage('about')">About</span></li><li><span onclick="showPage('contact')">Contact</span></li></ul></div>
+    <div class="fc-col"><h5>Contact</h5><ul><li><a href="mailto:info@insightforge.ai">info@insightforge.ai</a></li><li><span onclick="showPage('contact')">Schedule Consultation</span></li><li><a href="https://wa.me/1234567890">WhatsApp</a></li></ul></div>
+  </div><div class="footer-bottom"><p>© <span class="yr-span"></span> LTSGFH InsightForge Intelligence. All rights reserved.</p><div class="fb-links"><a href="#">Privacy Policy</a><a href="#">Terms</a></div></div></div></footer>
+</div><!-- END SERVICES -->
+
+<!-- ============================================================
+     PAGE: INDUSTRIES
+============================================================ -->
+<div class="page" id="page-industries">
+  <section class="page-hero">
+    <div class="container">
+      <div class="tag"><i class="fas fa-building"></i> Industries</div>
+      <h1 class="h1 white" style="margin-bottom:18px;">Analytics for <span class="teal">Every Industry</span></h1>
+      <p class="body-lg">Sector-specific analytics solutions tailored to the unique data challenges, KPIs, and strategic objectives of 11 industries.</p>
+    </div>
+  </section>
+
+  <!-- FIX #6: all images now use assets/ paths -->
+
+  <section class="ind-section"><div class="container"><div class="ind-inner">
+    <div class="ind-text reveal-l"><div class="ind-num">01</div><div class="tag"><i class="fas fa-gear"></i> Industry</div><h2 class="h2">Operations & <span class="teal">Maintenance</span></h2><p class="body-md">Maximize asset uptime, reduce failures, and streamline maintenance workflows with real-time operational intelligence.</p><div class="ind-uc-grid"><div class="ind-uc">Overall Efficiency Monitoring</div><div class="ind-uc">Downtime Heatmap Analysis</div><div class="ind-uc">Site Performance Matrix</div><div class="ind-uc">Operations Timeline</div><div class="ind-uc">Downtime Root Cause</div><div class="ind-uc">Critical Alerts Dashboard</div></div><span class="btn btn-primary" onclick="showPage('solutions')"><i class="fas fa-chart-bar"></i> View Dashboard</span></div>
+    <div class="ind-img reveal-r"><img src="assets/dashboard-operations.png" alt="Operations Dashboard" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/><div class="no-img" style="display:none;"><i class="fas fa-gear"></i><p>Operations Command Center</p></div></div>
+  </div></div></section>
+
+  <section class="ind-section"><div class="container"><div class="ind-inner flip">
+    <div class="ind-text reveal-r"><div class="ind-num">02</div><div class="tag"><i class="fas fa-hospital"></i> Industry</div><h2 class="h2">Healthcare <span class="teal">Analytics</span></h2><p class="body-md">Improve patient outcomes, optimize resource utilization, and monitor operational KPIs with comprehensive healthcare intelligence.</p><div class="ind-uc-grid"><div class="ind-uc">Patient Journey Analytics</div><div class="ind-uc">Admissions Trend Analysis</div><div class="ind-uc">Department Performance</div><div class="ind-uc">Patient Satisfaction Tracking</div><div class="ind-uc">Quality & Safety Metrics</div><div class="ind-uc">Top Diagnoses Analytics</div></div><span class="btn btn-primary" onclick="showPage('solutions')"><i class="fas fa-chart-bar"></i> View Dashboard</span></div>
+    <div class="ind-img reveal-l"><img src="assets/dashboard-healthcare.png" alt="Healthcare Dashboard" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/><div class="no-img" style="display:none;"><i class="fas fa-hospital"></i><p>Healthcare Performance Dashboard</p></div></div>
+  </div></div></section>
+
+  <section class="ind-section"><div class="container"><div class="ind-inner">
+    <div class="ind-text reveal-l"><div class="ind-num">03</div><div class="tag"><i class="fas fa-landmark"></i> Industry</div><h2 class="h2">Banking <span class="teal">Analytics</span></h2><p class="body-md">Monitor asset growth, loan portfolios, customer segments, and branch performance with enterprise banking intelligence.</p><div class="ind-uc-grid"><div class="ind-uc">Asset Growth Tracking</div><div class="ind-uc">Loan Portfolio Breakdown</div><div class="ind-uc">Customer Segment Analytics</div><div class="ind-uc">Revenue Performance</div><div class="ind-uc">Deposit Mix Analysis</div><div class="ind-uc">Top Performing Products</div></div><span class="btn btn-primary" onclick="showPage('solutions')"><i class="fas fa-chart-bar"></i> View Dashboard</span></div>
+    <div class="ind-img reveal-r"><img src="assets/dashboard-banking.png" alt="Banking Dashboard" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/><div class="no-img" style="display:none;"><i class="fas fa-landmark"></i><p>Banking Performance Dashboard</p></div></div>
+  </div></div></section>
+
+  <section class="ind-section"><div class="container"><div class="ind-inner flip">
+    <div class="ind-text reveal-r"><div class="ind-num">04</div><div class="tag"><i class="fas fa-dollar-sign"></i> Industry</div><h2 class="h2">Financial <span class="teal">Analytics</span></h2><p class="body-md">Gain financial clarity with revenue tracking, P&L analysis, budget vs. actual monitoring, and financial health indicators.</p><div class="ind-uc-grid"><div class="ind-uc">Revenue Over Time</div><div class="ind-uc">Profit & Loss Summary</div><div class="ind-uc">Cash Flow Overview</div><div class="ind-uc">Budget vs. Actual</div><div class="ind-uc">Expense Breakdown</div><div class="ind-uc">Financial Health Indicators</div></div><span class="btn btn-primary" onclick="showPage('solutions')"><i class="fas fa-chart-bar"></i> View Dashboard</span></div>
+    <div class="ind-img reveal-l"><img src="assets/dashboard-finance.png" alt="Finance Dashboard" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/><div class="no-img" style="display:none;"><i class="fas fa-dollar-sign"></i><p>Finance Performance Dashboard</p></div></div>
+  </div></div></section>
+
+  <section class="ind-section"><div class="container"><div class="ind-inner">
+    <div class="ind-text reveal-l"><div class="ind-num">05</div><div class="tag"><i class="fas fa-building"></i> Industry</div><h2 class="h2">Real Estate <span class="teal">Analytics</span></h2><p class="body-md">Monitor portfolio value, occupancy rates, NOI performance, and property-level analytics with premium real estate intelligence.</p><div class="ind-uc-grid"><div class="ind-uc">Property Portfolio Map</div><div class="ind-uc">Portfolio Value Tracking</div><div class="ind-uc">Occupancy Rate Analytics</div><div class="ind-uc">NOI Performance</div><div class="ind-uc">Top Performing Assets</div><div class="ind-uc">Leasing Activity Analytics</div></div><span class="btn btn-primary" onclick="showPage('solutions')"><i class="fas fa-chart-bar"></i> View Dashboard</span></div>
+    <div class="ind-img reveal-r"><img src="assets/dashboard-realestate.png" alt="Real Estate Dashboard" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/><div class="no-img" style="display:none;"><i class="fas fa-building"></i><p>Real Estate Intelligence Dashboard</p></div></div>
+  </div></div></section>
+
+  <section class="ind-section"><div class="container"><div class="ind-inner flip">
+    <div class="ind-text reveal-r"><div class="ind-num">06</div><div class="tag"><i class="fas fa-shopping-cart"></i> Industry</div><h2 class="h2">E-Commerce <span class="teal">Analytics</span></h2><p class="body-md">Track revenue, orders, customer journeys, and conversion rates across all channels with comprehensive e-commerce performance dashboards.</p><div class="ind-uc-grid"><div class="ind-uc">Customer Journey Funnel</div><div class="ind-uc">Revenue Trend Analysis</div><div class="ind-uc">Top Selling Products</div><div class="ind-uc">Sales by Channel</div><div class="ind-uc">Customer Segmentation</div><div class="ind-uc">Conversion Rate Analytics</div></div><span class="btn btn-primary" onclick="showPage('solutions')"><i class="fas fa-chart-bar"></i> View Dashboard</span></div>
+    <div class="ind-img reveal-l"><img src="assets/dashboard-ecommerce.png" alt="E-Commerce Dashboard" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/><div class="no-img" style="display:none;"><i class="fas fa-shopping-cart"></i><p>E-Commerce Performance Dashboard</p></div></div>
+  </div></div></section>
+
+  <section class="ind-section"><div class="container"><div class="ind-inner">
+    <div class="ind-text reveal-l"><div class="ind-num">07</div><div class="tag"><i class="fas fa-chart-line"></i> Industry</div><h2 class="h2">Sales <span class="teal">Analytics</span></h2><p class="body-md">Monitor pipeline, revenue, win rates, and rep performance with sales intelligence dashboards that drive pipeline velocity and revenue growth.</p><div class="ind-uc-grid"><div class="ind-uc">Sales Pipeline Funnel</div><div class="ind-uc">Revenue & Pipeline Trend</div><div class="ind-uc">Top Performing Sales Reps</div><div class="ind-uc">Pipeline by Stage</div><div class="ind-uc">Revenue by Region</div><div class="ind-uc">Win Rate Analytics</div></div><span class="btn btn-primary" onclick="showPage('solutions')"><i class="fas fa-chart-bar"></i> View Dashboard</span></div>
+    <div class="ind-img reveal-r"><img src="assets/dashboard-sales.png" alt="Sales Dashboard" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/><div class="no-img" style="display:none;"><i class="fas fa-chart-line"></i><p>Sales Performance Dashboard</p></div></div>
+  </div></div></section>
+
+  <section class="ind-section"><div class="container"><div class="ind-inner flip">
+    <div class="ind-text reveal-r"><div class="ind-num">08</div><div class="tag"><i class="fas fa-industry"></i> Industry</div><h2 class="h2">Manufacturing <span class="teal">Analytics</span></h2><p class="body-md">Optimize OEE, monitor production flow, track defect rates, and manage downtime with manufacturing intelligence dashboards.</p><div class="ind-uc-grid"><div class="ind-uc">OEE Monitoring</div><div class="ind-uc">Production Flow Visualization</div><div class="ind-uc">Downtime Heatmap</div><div class="ind-uc">Defect Rate Trend</div><div class="ind-uc">Resource Utilization</div><div class="ind-uc">Top Products by Output</div></div><span class="btn btn-primary" onclick="showPage('solutions')"><i class="fas fa-chart-bar"></i> View Dashboard</span></div>
+    <div class="ind-img reveal-l"><img src="assets/dashboard-manufacturing.png" alt="Manufacturing Dashboard" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/><div class="no-img" style="display:none;"><i class="fas fa-industry"></i><p>Manufacturing Intelligence Dashboard</p></div></div>
+  </div></div></section>
+
+  <section class="ind-section"><div class="container"><div class="ind-inner">
+    <div class="ind-text reveal-l"><div class="ind-num">09</div><div class="tag"><i class="fas fa-truck"></i> Industry</div><h2 class="h2">Logistics & Supply Chain <span class="teal">Analytics</span></h2><p class="body-md">Monitor shipments, on-time delivery, fleet performance, and supply chain efficiency with logistics intelligence dashboards.</p><div class="ind-uc-grid"><div class="ind-uc">Shipment Status Tracking</div><div class="ind-uc">On-Time Delivery by Region</div><div class="ind-uc">Shipments by Mode</div><div class="ind-uc">Top Routes Analytics</div><div class="ind-uc">Warehouse Performance</div><div class="ind-uc">Delay Reason Analysis</div></div><span class="btn btn-primary" onclick="showPage('solutions')"><i class="fas fa-chart-bar"></i> View Dashboard</span></div>
+    <div class="ind-img reveal-r"><img src="assets/dashboard-logistics.png" alt="Logistics Dashboard" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/><div class="no-img" style="display:none;"><i class="fas fa-truck"></i><p>Logistics Performance Dashboard</p></div></div>
+  </div></div></section>
+
+  <section class="ind-section"><div class="container"><div class="ind-inner flip">
+    <div class="ind-text reveal-r"><div class="ind-num">10</div><div class="tag"><i class="fas fa-users"></i> Industry</div><h2 class="h2">HR <span class="teal">Analytics</span></h2><p class="body-md">Monitor workforce health, attrition trends, employee engagement, and recruitment metrics with HR intelligence dashboards.</p><div class="ind-uc-grid"><div class="ind-uc">Employee Lifecycle Overview</div><div class="ind-uc">Attrition Rate Trend</div><div class="ind-uc">Employee Engagement Score</div><div class="ind-uc">Workforce Demographics</div><div class="ind-uc">Department Headcount</div><div class="ind-uc">Diversity & Inclusion Index</div></div><span class="btn btn-primary" onclick="showPage('solutions')"><i class="fas fa-chart-bar"></i> View Dashboard</span></div>
+    <div class="ind-img reveal-l"><img src="assets/dashboard-hr.png" alt="HR Dashboard" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/><div class="no-img" style="display:none;"><i class="fas fa-users"></i><p>HR Intelligence Dashboard</p></div></div>
+  </div></div></section>
+
+  <section class="ind-section" style="background:var(--navy);border-bottom:none;"><div class="container"><div class="ind-inner">
+    <div class="ind-text reveal-l"><div class="ind-num" style="color:rgba(0,180,216,.2);">11</div><div class="tag"><i class="fas fa-chart-candlestick"></i> Industry</div><h2 class="h2 white">Trading <span class="teal">Analytics</span></h2><p class="body-md" style="color:rgba(255,255,255,.55);">Professional trading analytics, strategy performance dashboards, risk monitoring, portfolio analytics, and trade performance reporting.</p><div class="ind-uc-grid"><div class="ind-uc" style="background:rgba(255,255,255,.05);border-color:var(--teal);color:rgba(255,255,255,.8);">Strategy Performance</div><div class="ind-uc" style="background:rgba(255,255,255,.05);border-color:var(--teal);color:rgba(255,255,255,.8);">Risk Monitoring</div><div class="ind-uc" style="background:rgba(255,255,255,.05);border-color:var(--teal);color:rgba(255,255,255,.8);">Portfolio Analytics</div><div class="ind-uc" style="background:rgba(255,255,255,.05);border-color:var(--teal);color:rgba(255,255,255,.8);">Trade Performance Reporting</div><div class="ind-uc" style="background:rgba(255,255,255,.05);border-color:var(--teal);color:rgba(255,255,255,.8);">Backtesting Analytics</div><div class="ind-uc" style="background:rgba(255,255,255,.05);border-color:var(--teal);color:rgba(255,255,255,.8);">P&L Attribution</div></div><span class="btn btn-primary" onclick="showPage('contact')"><i class="fas fa-calendar-check"></i> Discuss Your Needs</span></div>
+    <div class="ind-img reveal-r" style="border:1px solid var(--teal-border);border-radius:var(--r-lg);"><img src="assets/dashboard-trading.png" alt="Trading Dashboard" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/><div class="no-img" style="display:flex;min-height:280px;"><i class="fas fa-chart-candlestick"></i><p>Trading Analytics Dashboard<br/><small>Coming Soon</small></p></div></div>
+  </div></div></section>
+
+  <div class="cta-strip"><div class="container"><div class="cta-inner reveal"><h2 class="h2">Ready for Industry-Specific Analytics?</h2><p>Let's build the right solution for your industry and data challenges.</p><div class="cta-btns"><span class="btn btn-dark btn-lg" onclick="showPage('contact')"><i class="fas fa-calendar-check"></i> Schedule Consultation</span><span class="btn btn-outline-white btn-lg" onclick="showPage('solutions')"><i class="fas fa-chart-bar"></i> View Dashboards</span></div></div></div></div>
+
+  <footer><div class="container"><div class="footer-inner">
+    <div class="fb"><div class="fb-logo"><div class="fbl-img"><img src="assets/logo.png" alt="Logo" onerror="this.style.display='none';this.parentElement.innerHTML='<span style=\'font-family:Poppins;font-weight:900;font-size:.85rem;color:#0a1628;\'>IF</span>'"/></div><div><div class="fb-name">InsightForge Intelligence</div><div class="fb-tag">LTSGFH</div></div></div><p>Analytics solutions across 11 industries.</p><div class="f-social"><a href="#" class="fs-btn"><i class="fab fa-linkedin-in"></i></a><a href="mailto:info@insightforge.ai" class="fs-btn"><i class="fas fa-envelope"></i></a><a href="https://wa.me/1234567890" class="fs-btn"><i class="fab fa-whatsapp"></i></a></div></div>
+    <div class="fc-col"><h5>Industries</h5><ul><li><span onclick="showPage('industries')">Operations & Maintenance</span></li><li><span onclick="showPage('industries')">Healthcare Analytics</span></li><li><span onclick="showPage('industries')">Banking Analytics</span></li><li><span onclick="showPage('industries')">Financial Analytics</span></li><li><span onclick="showPage('industries')">Manufacturing</span></li></ul></div>
+    <div class="fc-col"><h5>More Industries</h5><ul><li><span onclick="showPage('industries')">Real Estate Analytics</span></li><li><span onclick="showPage('industries')">E-Commerce Analytics</span></li><li><span onclick="showPage('industries')">Sales Analytics</span></li><li><span onclick="showPage('industries')">Logistics & Supply Chain</span></li><li><span onclick="showPage('industries')">HR Analytics</span></li></ul></div>
+    <div class="fc-col"><h5>Company</h5><ul><li><span onclick="showPage('home')">Home</span></li><li><span onclick="showPage('services')">Services</span></li><li><span onclick="showPage('solutions')">Solutions</span></li><li><span onclick="showPage('about')">About</span></li><li><span onclick="showPage('contact')">Contact</span></li></ul></div>
+  </div><div class="footer-bottom"><p>© <span class="yr-span"></span> LTSGFH InsightForge Intelligence. All rights reserved.</p><div class="fb-links"><a href="#">Privacy Policy</a><a href="#">Terms</a></div></div></div></footer>
+</div><!-- END INDUSTRIES -->
+
+<!-- ============================================================
+     PAGE: SOLUTIONS
+============================================================ -->
+<div class="page" id="page-solutions">
+  <section class="page-hero">
+    <div class="container">
+      <div class="tag"><i class="fas fa-display"></i> Dashboard Solutions</div>
+      <h1 class="h1 white" style="margin-bottom:18px;">Real Dashboards. <span class="teal">Real Intelligence.</span></h1>
+      <p class="body-lg">Every dashboard is purpose-built for its industry — unique layouts, industry-specific metrics, and executive-level business storytelling. No templates. No copy-paste.</p>
+    </div>
+  </section>
+
+  <section class="dash-section"><div class="container"><div class="dash-inner">
+    <div class="dash-text reveal-l"><div class="tag"><i class="fas fa-gear"></i> Operations & Maintenance</div><h2 class="h2">Operations <span class="teal">Command Center</span></h2><p class="body-md">Real-time operational intelligence with site performance matrix, downtime heatmaps, operations timeline, and critical alert monitoring.</p><div class="dash-metrics"><div class="dm"><div class="val">92.4%</div><div class="lbl">Overall Efficiency</div></div><div class="dm"><div class="val">1.23M</div><div class="lbl">Total Output</div></div><div class="dm"><div class="val">24</div><div class="lbl">Active Sites</div></div><div class="dm"><div class="val">95.8%</div><div class="lbl">On-Time Delivery</div></div></div><span class="btn btn-primary" onclick="showPage('contact')"><i class="fas fa-calendar-check"></i> Request This Dashboard</span></div>
+    <div class="dash-img reveal-r"><img src="assets/dashboard-operations.png" alt="Operations Dashboard" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/><div class="no-img" style="display:none;"><i class="fas fa-gear"></i><p>Operations Command Center</p></div></div>
+  </div></div></section>
+
+  <section class="dash-section"><div class="container"><div class="dash-inner flip">
+    <div class="dash-text reveal-r"><div class="tag"><i class="fas fa-industry"></i> Manufacturing</div><h2 class="h2">Manufacturing <span class="teal">Intelligence Dashboard</span></h2><p class="body-md">Smarter operations with production flow visualization, OEE tracking, downtime heatmaps, defect rate trends, and resource utilization monitoring.</p><div class="dash-metrics"><div class="dm"><div class="val">2.45M</div><div class="lbl">Total Output (YTD)</div></div><div class="dm"><div class="val">87.6%</div><div class="lbl">OEE</div></div><div class="dm"><div class="val">1.32%</div><div class="lbl">Defect Rate</div></div><div class="dm"><div class="val">94.2%</div><div class="lbl">On-Time Delivery</div></div></div><span class="btn btn-primary" onclick="showPage('contact')"><i class="fas fa-calendar-check"></i> Request This Dashboard</span></div>
+    <div class="dash-img reveal-l"><img src="assets/dashboard-manufacturing.png" alt="Manufacturing Dashboard" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/><div class="no-img" style="display:none;"><i class="fas fa-industry"></i><p>Manufacturing Intelligence Dashboard</p></div></div>
+  </div></div></section>
+
+  <section class="dash-section"><div class="container"><div class="dash-inner">
+    <div class="dash-text reveal-l"><div class="tag"><i class="fas fa-hospital"></i> Healthcare</div><h2 class="h2">Healthcare <span class="teal">Performance Dashboard</span></h2><p class="body-md">Better care through smarter decisions — patient journey analytics, admissions trends, department performance, satisfaction tracking, and quality metrics.</p><div class="dash-metrics"><div class="dm"><div class="val">78,450</div><div class="lbl">Total Patients</div></div><div class="dm"><div class="val">4.47/5</div><div class="lbl">Patient Satisfaction</div></div><div class="dm"><div class="val">11.2%</div><div class="lbl">Readmission Rate</div></div><div class="dm"><div class="val">4.6 Days</div><div class="lbl">Avg Length of Stay</div></div></div><span class="btn btn-primary" onclick="showPage('contact')"><i class="fas fa-calendar-check"></i> Request This Dashboard</span></div>
+    <div class="dash-img reveal-r"><img src="assets/dashboard-healthcare.png" alt="Healthcare Dashboard" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/><div class="no-img" style="display:none;"><i class="fas fa-hospital"></i><p>Healthcare Performance Dashboard</p></div></div>
+  </div></div></section>
+
+  <section class="dash-section"><div class="container"><div class="dash-inner flip">
+    <div class="dash-text reveal-r"><div class="tag"><i class="fas fa-landmark"></i> Banking</div><h2 class="h2">Banking <span class="teal">Performance Dashboard</span></h2><p class="body-md">Trusted relationships, smarter banking — asset growth tracking, loan portfolio breakdown, customer segmentation, and revenue performance.</p><div class="dash-metrics"><div class="dm"><div class="val">$2.48T</div><div class="lbl">Total Assets</div></div><div class="dm"><div class="val">$8.76B</div><div class="lbl">Net Profit</div></div><div class="dm"><div class="val">1.32%</div><div class="lbl">NPL Ratio</div></div><div class="dm"><div class="val">42.6%</div><div class="lbl">Cost to Income</div></div></div><span class="btn btn-primary" onclick="showPage('contact')"><i class="fas fa-calendar-check"></i> Request This Dashboard</span></div>
+    <div class="dash-img reveal-l"><img src="assets/dashboard-banking.png" alt="Banking Dashboard" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/><div class="no-img" style="display:none;"><i class="fas fa-landmark"></i><p>Banking Performance Dashboard</p></div></div>
+  </div></div></section>
+
+  <section class="dash-section"><div class="container"><div class="dash-inner">
+    <div class="dash-text reveal-l"><div class="tag"><i class="fas fa-dollar-sign"></i> Finance</div><h2 class="h2">Finance <span class="teal">Performance Dashboard</span></h2><p class="body-md">Financial clarity through strategic insights — revenue over time, P&L summary, cash flow overview, budget vs. actual, and financial health indicators.</p><div class="dash-metrics"><div class="dm"><div class="val">$125.8M</div><div class="lbl">Total Revenue</div></div><div class="dm"><div class="val">$24.7M</div><div class="lbl">Net Profit</div></div><div class="dm"><div class="val">19.7%</div><div class="lbl">Net Profit Margin</div></div><div class="dm"><div class="val">$31.6M</div><div class="lbl">Operating Cash Flow</div></div></div><span class="btn btn-primary" onclick="showPage('contact')"><i class="fas fa-calendar-check"></i> Request This Dashboard</span></div>
+    <div class="dash-img reveal-r"><img src="assets/dashboard-finance.png" alt="Finance Dashboard" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/><div class="no-img" style="display:none;"><i class="fas fa-dollar-sign"></i><p>Finance Performance Dashboard</p></div></div>
+  </div></div></section>
+
+  <section class="dash-section"><div class="container"><div class="dash-inner flip">
+    <div class="dash-text reveal-r"><div class="tag"><i class="fas fa-building"></i> Real Estate</div><h2 class="h2">Real Estate <span class="teal">Intelligence Dashboard</span></h2><p class="body-md">Smarter investments, stronger portfolios — property portfolio map, value tracking, occupancy analytics, NOI performance, and top asset rankings.</p><div class="dash-metrics"><div class="dm"><div class="val">1,248</div><div class="lbl">Total Properties</div></div><div class="dm"><div class="val">$2.85B</div><div class="lbl">Portfolio Value</div></div><div class="dm"><div class="val">92.6%</div><div class="lbl">Occupancy Rate</div></div><div class="dm"><div class="val">6.42%</div><div class="lbl">Avg CAP Rate</div></div></div><span class="btn btn-primary" onclick="showPage('contact')"><i class="fas fa-calendar-check"></i> Request This Dashboard</span></div>
+    <div class="dash-img reveal-l"><img src="assets/dashboard-realestate.png" alt="Real Estate Dashboard" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/><div class="no-img" style="display:none;"><i class="fas fa-building"></i><p>Real Estate Intelligence Dashboard</p></div></div>
+  </div></div></section>
+
+  <section class="dash-section"><div class="container"><div class="dash-inner">
+    <div class="dash-text reveal-l"><div class="tag"><i class="fas fa-shopping-cart"></i> E-Commerce</div><h2 class="h2">E-Commerce <span class="teal">Performance Dashboard</span></h2><p class="body-md">Customers. Orders. Growth. Delivered — customer journey funnel, revenue trends, top products, channel analytics, and regional sales performance.</p><div class="dash-metrics"><div class="dm"><div class="val">$4.58M</div><div class="lbl">Total Revenue</div></div><div class="dm"><div class="val">126,842</div><div class="lbl">Total Orders</div></div><div class="dm"><div class="val">83,271</div><div class="lbl">Active Customers</div></div><div class="dm"><div class="val">3.62%</div><div class="lbl">Conversion Rate</div></div></div><span class="btn btn-primary" onclick="showPage('contact')"><i class="fas fa-calendar-check"></i> Request This Dashboard</span></div>
+    <div class="dash-img reveal-r"><img src="assets/dashboard-ecommerce.png" alt="E-Commerce Dashboard" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/><div class="no-img" style="display:none;"><i class="fas fa-shopping-cart"></i><p>E-Commerce Performance Dashboard</p></div></div>
+  </div></div></section>
+
+  <section class="dash-section"><div class="container"><div class="dash-inner flip">
+    <div class="dash-text reveal-r"><div class="tag"><i class="fas fa-chart-line"></i> Sales</div><h2 class="h2">Sales <span class="teal">Performance Dashboard</span></h2><p class="body-md">Pipeline today, revenue tomorrow — sales pipeline funnel, revenue trends, top rep performance, pipeline by stage, and regional revenue breakdown.</p><div class="dash-metrics"><div class="dm"><div class="val">$32.68M</div><div class="lbl">Total Revenue (YTD)</div></div><div class="dm"><div class="val">$45.72M</div><div class="lbl">Pipeline Value</div></div><div class="dm"><div class="val">28.7%</div><div class="lbl">Win Rate</div></div><div class="dm"><div class="val">$215K</div><div class="lbl">Avg Deal Size</div></div></div><span class="btn btn-primary" onclick="showPage('contact')"><i class="fas fa-calendar-check"></i> Request This Dashboard</span></div>
+    <div class="dash-img reveal-l"><img src="assets/dashboard-sales.png" alt="Sales Dashboard" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/><div class="no-img" style="display:none;"><i class="fas fa-chart-line"></i><p>Sales Performance Dashboard</p></div></div>
+  </div></div></section>
+
+  <section class="dash-section"><div class="container"><div class="dash-inner">
+    <div class="dash-text reveal-l"><div class="tag"><i class="fas fa-truck"></i> Logistics</div><h2 class="h2">Logistics <span class="teal">Performance Dashboard</span></h2><p class="body-md">Delivering efficiency, driving performance — shipment tracking, on-time delivery by region, route analytics, warehouse performance, and delay analysis.</p><div class="dash-metrics"><div class="dm"><div class="val">15,247</div><div class="lbl">Total Shipments</div></div><div class="dm"><div class="val">92.6%</div><div class="lbl">On-Time Delivery</div></div><div class="dm"><div class="val">2.8 Days</div><div class="lbl">Avg Transit Time</div></div><div class="dm"><div class="val">$285.6</div><div class="lbl">Cost per Shipment</div></div></div><span class="btn btn-primary" onclick="showPage('contact')"><i class="fas fa-calendar-check"></i> Request This Dashboard</span></div>
+    <div class="dash-img reveal-r"><img src="assets/dashboard-logistics.png" alt="Logistics Dashboard" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/><div class="no-img" style="display:none;"><i class="fas fa-truck"></i><p>Logistics Performance Dashboard</p></div></div>
+  </div></div></section>
+
+  <section class="dash-section"><div class="container"><div class="dash-inner flip">
+    <div class="dash-text reveal-r"><div class="tag"><i class="fas fa-users"></i> HR</div><h2 class="h2">HR <span class="teal">Intelligence Dashboard</span></h2><p class="body-md">People first, performance always — employee lifecycle, attrition trends, engagement scores, workforce demographics, and diversity analytics.</p><div class="dash-metrics"><div class="dm"><div class="val">4,680</div><div class="lbl">Total Employees</div></div><div class="dm"><div class="val">8.7%</div><div class="lbl">Attrition Rate</div></div><div class="dm"><div class="val">4.32/5</div><div class="lbl">Engagement Score</div></div><div class="dm"><div class="val">$76.4K</div><div class="lbl">Avg Compensation</div></div></div><span class="btn btn-primary" onclick="showPage('contact')"><i class="fas fa-calendar-check"></i> Request This Dashboard</span></div>
+    <div class="dash-img reveal-l"><img src="assets/dashboard-hr.png" alt="HR Dashboard" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/><div class="no-img" style="display:none;"><i class="fas fa-users"></i><p>HR Intelligence Dashboard</p></div></div>
+  </div></div></section>
+
+  <!-- SOLUTIONS GRID -->
+  <section class="sol-grid-section">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="tag"><i class="fas fa-grid-2"></i> All Dashboards</div>
+        <h2 class="h2 white">Complete <span class="teal">Dashboard Portfolio</span></h2>
+        <p class="body-lg" style="color:rgba(255,255,255,.55);">Every dashboard built to Power BI design standards — premium KPI cards, executive layouts, and industry-specific storytelling.</p>
+      </div>
+      <div class="sol-grid">
+        <div class="sgc reveal" onclick="showPage('contact')"><div class="sgc-img"><img src="assets/dashboard-operations.png" alt="Operations" onerror="this.style.display='none'"/><i class="fas fa-gear sgc-img-icon" style="display:none;font-size:2.2rem;color:rgba(0,180,216,.3);"></i></div><div class="sgc-body"><span class="sgc-tag">Operations</span><h4>Operations Command Center</h4><p>Real-time site performance, downtime heatmaps, and operational intelligence.</p></div></div>
+        <div class="sgc reveal" onclick="showPage('contact')"><div class="sgc-img"><img src="assets/dashboard-manufacturing.png" alt="Manufacturing" onerror="this.style.display='none'"/></div><div class="sgc-body"><span class="sgc-tag">Manufacturing</span><h4>Manufacturing Intelligence</h4><p>OEE, production flow, defect tracking, and resource utilization.</p></div></div>
+        <div class="sgc reveal" onclick="showPage('contact')"><div class="sgc-img"><img src="assets/dashboard-healthcare.png" alt="Healthcare" onerror="this.style.display='none'"/></div><div class="sgc-body"><span class="sgc-tag">Healthcare</span><h4>Healthcare Performance</h4><p>Patient analytics, department performance, and quality metrics.</p></div></div>
+        <div class="sgc reveal" onclick="showPage('contact')"><div class="sgc-img"><img src="assets/dashboard-banking.png" alt="Banking" onerror="this.style.display='none'"/></div><div class="sgc-body"><span class="sgc-tag">Banking</span><h4>Banking Performance</h4><p>Assets, loans, deposits, customer segments, and revenue analytics.</p></div></div>
+        <div class="sgc reveal" onclick="showPage('contact')"><div class="sgc-img"><img src="assets/dashboard-finance.png" alt="Finance" onerror="this.style.display='none'"/></div><div class="sgc-body"><span class="sgc-tag">Finance</span><h4>Finance Performance</h4><p>Revenue, P&L, cash flow, budget vs. actual, and financial health.</p></div></div>
+        <div class="sgc reveal" onclick="showPage('contact')"><div class="sgc-img"><img src="assets/dashboard-realestate.png" alt="Real Estate" onerror="this.style.display='none'"/></div><div class="sgc-body"><span class="sgc-tag">Real Estate</span><h4>Real Estate Intelligence</h4><p>Portfolio map, occupancy, NOI performance, and top assets.</p></div></div>
+        <div class="sgc reveal" onclick="showPage('contact')"><div class="sgc-img"><img src="assets/dashboard-ecommerce.png" alt="E-Commerce" onerror="this.style.display='none'"/></div><div class="sgc-body"><span class="sgc-tag">E-Commerce</span><h4>E-Commerce Performance</h4><p>Customer journey, revenue trends, products, and channel analytics.</p></div></div>
+        <div class="sgc reveal" onclick="showPage('contact')"><div class="sgc-img"><img src="assets/dashboard-sales.png" alt="Sales" onerror="this.style.display='none'"/></div><div class="sgc-body"><span class="sgc-tag">Sales</span><h4>Sales Performance</h4><p>Pipeline funnel, rep performance, and regional revenue analytics.</p></div></div>
+        <div class="sgc reveal" onclick="showPage('contact')"><div class="sgc-img"><img src="assets/dashboard-logistics.png" alt="Logistics" onerror="this.style.display='none'"/></div><div class="sgc-body"><span class="sgc-tag">Logistics</span><h4>Logistics Performance</h4><p>Shipments, delivery rates, routes, warehouses, and delay analysis.</p></div></div>
+        <div class="sgc reveal" onclick="showPage('contact')"><div class="sgc-img"><img src="assets/dashboard-hr.png" alt="HR" onerror="this.style.display='none'"/></div><div class="sgc-body"><span class="sgc-tag">HR</span><h4>HR Intelligence</h4><p>Workforce lifecycle, attrition, engagement, and diversity analytics.</p></div></div>
+        <!-- Trading — coming soon -->
+        <div class="sgc reveal" onclick="showPage('contact')" style="border-color:var(--teal-border);"><div class="sgc-img"><i class="fas fa-chart-candlestick no-img-icon"></i></div><div class="sgc-body"><span class="sgc-tag">Trading</span><h4>Trading Analytics</h4><p>Strategy performance, risk monitoring, portfolio analytics, and trade reporting.</p></div></div>
+        <!-- Custom -->
+        <div class="sgc reveal" onclick="showPage('contact')" style="border-color:var(--teal-border);background:rgba(0,180,216,.06);"><div class="sgc-img"><i class="fas fa-plus no-img-icon"></i></div><div class="sgc-body"><span class="sgc-tag">Custom</span><h4>Your Industry Dashboard</h4><p>Don't see your industry? We build bespoke dashboards for any sector.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="cta-strip"><div class="container"><div class="cta-inner reveal"><h2 class="h2">Want a Dashboard Built for Your Industry?</h2><p>Schedule a consultation and let's discuss your specific analytics requirements.</p><div class="cta-btns"><span class="btn btn-dark btn-lg" onclick="showPage('contact')"><i class="fas fa-calendar-check"></i> Schedule Consultation</span><span class="btn btn-outline-white btn-lg" onclick="showPage('industries')"><i class="fas fa-building"></i> View Industries</span></div></div></div></div>
+
+  <footer><div class="container"><div class="footer-inner">
+    <div class="fb"><div class="fb-logo"><div class="fbl-img"><img src="assets/logo.png" alt="Logo" onerror="this.style.display='none';this.parentElement.innerHTML='<span style=\'font-family:Poppins;font-weight:900;font-size:.85rem;color:#0a1628;\'>IF</span>'"/></div><div><div class="fb-name">InsightForge Intelligence</div><div class="fb-tag">LTSGFH</div></div></div><p>11 industry-specific dashboard solutions built to Power BI design standards.</p><div class="f-social"><a href="#" class="fs-btn"><i class="fab fa-linkedin-in"></i></a><a href="mailto:info@insightforge.ai" class="fs-btn"><i class="fas fa-envelope"></i></a><a href="https://wa.me/1234567890" class="fs-btn"><i class="fab fa-whatsapp"></i></a></div></div>
+    <div class="fc-col"><h5>Solutions</h5><ul><li><span onclick="showPage('solutions')">Operations Dashboard</span></li><li><span onclick="showPage('solutions')">Manufacturing Dashboard</span></li><li><span onclick="showPage('solutions')">Healthcare Dashboard</span></li><li><span onclick="showPage('solutions')">Banking Dashboard</span></li><li><span onclick="showPage('solutions')">Finance Dashboard</span></li></ul></div>
+    <div class="fc-col"><h5>More Solutions</h5><ul><li><span onclick="showPage('solutions')">Real Estate Dashboard</span></li><li><span onclick="showPage('solutions')">E-Commerce Dashboard</span></li><li><span onclick="showPage('solutions')">Sales Dashboard</span></li><li><span onclick="showPage('solutions')">Logistics Dashboard</span></li><li><span onclick="showPage('solutions')">HR Dashboard</span></li></ul></div>
+    <div class="fc-col"><h5>Company</h5><ul><li><span onclick="showPage('home')">Home</span></li><li><span onclick="showPage('services')">Services</span></li><li><span onclick="showPage('industries')">Industries</span></li><li><span onclick="showPage('about')">About</span></li><li><span onclick="showPage('contact')">Contact</span></li></ul></div>
+  </div><div class="footer-bottom"><p>© <span class="yr-span"></span> LTSGFH InsightForge Intelligence. All rights reserved.</p><div class="fb-links"><a href="#">Privacy Policy</a><a href="#">Terms</a></div></div></div></footer>
+</div><!-- END SOLUTIONS -->
+
+<!-- ============================================================
+     PAGE: ABOUT
+============================================================ -->
+<div class="page" id="page-about">
+  <section class="about-hero">
+    <div class="container">
+      <div class="tag"><i class="fas fa-building"></i> About Us</div>
+      <h1 class="h1 white" style="margin-bottom:18px;">We Are <span class="teal">InsightForge Intelligence</span></h1>
+      <p class="body-lg" style="color:rgba(255,255,255,.62);max-width:580px;margin:0 auto;">A data analytics and business intelligence firm dedicated to transforming raw data into strategic intelligence that drives measurable business outcomes.</p>
+    </div>
+  </section>
+
+  <section class="about-story">
+    <div class="container"><div class="about-story-inner">
+      <div class="reveal-l">
+        <div class="tag"><i class="fas fa-info-circle"></i> Our Story</div>
+        <h2 class="h2">Built to Transform <span class="teal">Data Into Strategy</span></h2>
+        <p class="body-md">LTSGFH InsightForge Intelligence was founded with a clear purpose: to help organizations stop drowning in data and start making decisions with confidence.</p>
+        <p class="body-md" style="margin-top:12px;">We recognized that most organizations have more data than they can use — and less intelligence than they need. We bridge that gap through analytics consulting, purpose-built dashboards, and intelligent automation solutions.</p>
+        <p class="body-md" style="margin-top:12px;">Today, we serve clients across 11 industries — from Operations and Healthcare to Banking, Finance, Real Estate, and Trading — delivering analytics solutions that create real, measurable business impact.</p>
+        <span class="btn btn-primary" style="margin-top:24px;" onclick="showPage('contact')"><i class="fas fa-calendar-check"></i> Work With Us</span>
+      </div>
+      <div class="about-visual reveal-r">
+        <div class="about-logo-c">
+          <img src="assets/logo.png" alt="LTSGFH Logo" onerror="this.style.display='none'"/>
+          <h3>LTSGFH InsightForge Intelligence</h3>
+          <span>Transforming Data into Intelligence</span>
+        </div>
+        <div class="mv-cards">
+          <div class="mvc"><div class="mvc-ic">🎯</div><h5>Our Mission</h5><p>Transform Data into Actionable Intelligence that empowers organizations to make faster, smarter decisions.</p></div>
+          <div class="mvc"><div class="mvc-ic">🌍</div><h5>Our Vision</h5><p>Become a globally trusted analytics and intelligence partner across every industry we serve.</p></div>
+          <div class="mvc"><div class="mvc-ic">📊</div><h5>Our Focus</h5><p>Business Intelligence, Data Analytics, Dashboard Development, and Trading Analytics.</p></div>
+          <div class="mvc"><div class="mvc-ic">🏆</div><h5>Our Standard</h5><p>Power BI design standards, executive-quality reporting, and industry-specific precision.</p></div>
+        </div>
+      </div>
+    </div></div>
+  </section>
+
+  <section class="mv-section">
+    <div class="container">
+      <div class="section-header reveal"><div class="tag"><i class="fas fa-star"></i> Our Foundation</div><h2 class="h2">Mission, Vision & <span class="teal">Purpose</span></h2></div>
+      <div class="mv-grid">
+        <div class="mvb reveal"><div class="mvb-ic"><i class="fas fa-bullseye"></i></div><h3>Our Mission</h3><p>Transform Data into Actionable Intelligence. We exist to help organizations move from data confusion to strategic clarity — through analytics, dashboards, and automation that deliver real business impact.</p></div>
+        <div class="mvb reveal"><div class="mvb-ic"><i class="fas fa-globe"></i></div><h3>Our Vision</h3><p>Become a trusted analytics and intelligence partner — the firm that organizations across every industry turn to when they need data to become strategy, and strategy to become growth.</p></div>
+        <div class="mvb reveal"><div class="mvb-ic"><i class="fas fa-handshake"></i></div><h3>Our Promise</h3><p>Every engagement is approached with precision, integrity, and a relentless focus on business impact. We don't deliver dashboards — we deliver decisions, clarity, and competitive advantage.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="values-section">
+    <div class="container">
+      <div class="section-header reveal"><div class="tag" style="background:rgba(0,180,216,.1);"><i class="fas fa-heart"></i> Core Values</div><h2 class="h2 white">The Values That <span class="teal">Drive Us</span></h2></div>
+      <div class="val-grid">
+        <div class="val reveal"><div class="v-ic">💡</div><h4>Innovation</h4><p>We continuously explore new analytics approaches to deliver cutting-edge solutions.</p></div>
+        <div class="val reveal"><div class="v-ic">🎯</div><h4>Accuracy</h4><p>Data integrity is non-negotiable. Every insight we deliver is validated, tested, and trustworthy.</p></div>
+        <div class="val reveal"><div class="v-ic">🤝</div><h4>Integrity</h4><p>We operate with full transparency, honesty, and accountability in every client engagement.</p></div>
+        <div class="val reveal"><div class="v-ic">📈</div><h4>Business Impact</h4><p>We measure our success by the measurable business outcomes we create for our clients.</p></div>
+        <div class="val reveal"><div class="v-ic">🔄</div><h4>Continuous Growth</h4><p>We never stop learning, improving, and evolving our capabilities to stay ahead of the curve.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="exp-section">
+    <div class="container">
+      <div class="section-header reveal"><div class="tag"><i class="fas fa-tools"></i> Our Expertise</div><h2 class="h2">What We <span class="teal">Excel At</span></h2></div>
+      <div class="exp-grid">
+        <div class="exp reveal"><div class="e-ic">📊</div><h4>Power BI Development</h4><p>Enterprise-grade Power BI dashboards built to the highest design standards for every industry.</p></div>
+        <div class="exp reveal"><div class="e-ic">🗄️</div><h4>SQL & Data Engineering</h4><p>Advanced SQL analysis, data modeling, ETL pipelines, and data warehouse design.</p></div>
+        <div class="exp reveal"><div class="e-ic">⚡</div><h4>Reporting Automation</h4><p>Excel automation, Power Automate workflows, and scheduled reporting systems.</p></div>
+        <div class="exp reveal"><div class="e-ic">📈</div><h4>Trading Analytics</h4><p>Strategy performance dashboards, risk monitoring, and portfolio analytics for financial markets.</p></div>
+        <div class="exp reveal"><div class="e-ic">🏭</div><h4>Industry Specialization</h4><p>Deep domain knowledge across 11 industries — from Manufacturing to Healthcare to Finance.</p></div>
+        <div class="exp reveal"><div class="e-ic">🎨</div><h4>Dashboard Design</h4><p>Premium visual design with executive-level storytelling, KPI cards, and drill-through concepts.</p></div>
+        <div class="exp reveal"><div class="e-ic">🔗</div><h4>Data Integration</h4><p>Multi-source data integration connecting databases, APIs, and cloud platforms seamlessly.</p></div>
+        <div class="exp reveal"><div class="e-ic">🤖</div><h4>AI & Automation</h4><p>AI-powered trading bots, intelligent automation, and next-generation analytics capabilities.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="cta-strip"><div class="container"><div class="cta-inner reveal"><h2 class="h2">Ready to Work With InsightForge Intelligence?</h2><p>Let's discuss your data challenges and build the analytics solution your organization needs.</p><div class="cta-btns"><span class="btn btn-dark btn-lg" onclick="showPage('contact')"><i class="fas fa-calendar-check"></i> Schedule Consultation</span><span class="btn btn-outline-white btn-lg" onclick="showPage('solutions')"><i class="fas fa-chart-bar"></i> View Our Solutions</span></div></div></div></div>
+
+  <footer><div class="container"><div class="footer-inner">
+    <div class="fb"><div class="fb-logo"><div class="fbl-img"><img src="assets/logo.png" alt="Logo" onerror="this.style.display='none';this.parentElement.innerHTML='<span style=\'font-family:Poppins;font-weight:900;font-size:.85rem;color:#0a1628;\'>IF</span>'"/></div><div><div class="fb-name">InsightForge Intelligence</div><div class="fb-tag">LTSGFH</div></div></div><p>Transforming Data into Intelligence — across 11 industries.</p><div class="f-social"><a href="#" class="fs-btn"><i class="fab fa-linkedin-in"></i></a><a href="mailto:info@insightforge.ai" class="fs-btn"><i class="fas fa-envelope"></i></a><a href="https://wa.me/1234567890" class="fs-btn"><i class="fab fa-whatsapp"></i></a></div></div>
+    <div class="fc-col"><h5>Company</h5><ul><li><span onclick="showPage('about')">About Us</span></li><li><span onclick="showPage('about')">Mission & Vision</span></li><li><span onclick="showPage('about')">Core Values</span></li><li><span onclick="showPage('about')">Our Expertise</span></li></ul></div>
+    <div class="fc-col"><h5>Services</h5><ul><li><span onclick="showPage('services')">Business Intelligence</span></li><li><span onclick="showPage('services')">Data Analytics</span></li><li><span onclick="showPage('services')">Automation</span></li><li><span onclick="showPage('services')">Trading Analytics</span></li></ul></div>
+    <div class="fc-col"><h5>Contact</h5><ul><li><a href="mailto:info@insightforge.ai">info@insightforge.ai</a></li><li><span onclick="showPage('contact')">Schedule Consultation</span></li><li><a href="https://wa.me/1234567890">WhatsApp</a></li><li><span onclick="showPage('solutions')">View Solutions</span></li></ul></div>
+  </div><div class="footer-bottom"><p>© <span class="yr-span"></span> LTSGFH InsightForge Intelligence. All rights reserved.</p><div class="fb-links"><a href="#">Privacy Policy</a><a href="#">Terms</a></div></div></div></footer>
+</div><!-- END ABOUT -->
+
+<!-- ============================================================
+     PAGE: CONTACT
+============================================================ -->
+<div class="page" id="page-contact">
+  <section class="contact-hero">
+    <div class="container">
+      <div class="tag"><i class="fas fa-envelope"></i> Contact Us</div>
+      <h1 class="h1 white" style="margin-bottom:18px;">Let's Turn Your Data <span class="teal">Into Strategy</span></h1>
+      <p class="body-lg" style="color:rgba(255,255,255,.62);max-width:520px;">Ready to unlock the intelligence hidden in your data? Schedule a consultation or send us a message — we respond within 24 hours.</p>
+    </div>
+  </section>
+
+  <section class="contact-section">
+    <div class="container"><div class="contact-inner">
+      <div class="ci-col reveal-l">
+        <h3>Get In Touch</h3>
+        <p class="body-md">Whether you're ready to start a project or exploring your options, we're here to help you find the right analytics solution.</p>
+        <div class="ci-items">
+          <div class="ci-item"><div class="ci-icon"><i class="fas fa-envelope"></i></div><div class="ci-text"><strong>Email</strong><a href="mailto:info@insightforge.ai">info@insightforge.ai</a></div></div>
+          <div class="ci-item"><div class="ci-icon"><i class="fab fa-linkedin"></i></div><div class="ci-text"><strong>LinkedIn</strong><a href="#" target="_blank">LTSGFH InsightForge Intelligence</a></div></div>
+          <div class="ci-item"><div class="ci-icon"><i class="fab fa-whatsapp"></i></div><div class="ci-text"><strong>WhatsApp</strong><span>Available for quick consultations</span></div></div>
+        </div>
+        <div class="soc-row">
+          <a href="#" class="soc-btn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="mailto:info@insightforge.ai" class="soc-btn"><i class="fas fa-envelope"></i></a>
+          <a href="https://wa.me/1234567890" class="soc-btn"><i class="fab fa-whatsapp"></i></a>
+        </div>
+        <a href="https://wa.me/1234567890" class="wa-link" target="_blank"><i class="fab fa-whatsapp"></i> Chat on WhatsApp</a>
+        <div style="margin-top:32px;padding:24px;background:var(--white);border-radius:var(--r-md);border:1px solid var(--gray-2);">
+          <h4 style="font-family:var(--font-head);font-weight:700;color:var(--navy-2);margin-bottom:14px;font-size:.92rem;">What to Expect</h4>
+          <div style="display:flex;flex-direction:column;gap:10px;">
+            <div style="display:flex;align-items:center;gap:9px;"><div style="width:26px;height:26px;background:var(--teal-glow);border-radius:50%;display:flex;align-items:center;justify-content:center;"><i class="fas fa-check" style="color:var(--teal);font-size:.65rem;"></i></div><span style="font-size:.81rem;color:var(--text-body);">Response within 24 hours</span></div>
+            <div style="display:flex;align-items:center;gap:9px;"><div style="width:26px;height:26px;background:var(--teal-glow);border-radius:50%;display:flex;align-items:center;justify-content:center;"><i class="fas fa-check" style="color:var(--teal);font-size:.65rem;"></i></div><span style="font-size:.81rem;color:var(--text-body);">Free initial consultation</span></div>
+            <div style="display:flex;align-items:center;gap:9px;"><div style="width:26px;height:26px;background:var(--teal-glow);border-radius:50%;display:flex;align-items:center;justify-content:center;"><i class="fas fa-check" style="color:var(--teal);font-size:.65rem;"></i></div><span style="font-size:.81rem;color:var(--text-body);">Tailored solution proposal</span></div>
+            <div style="display:flex;align-items:center;gap:9px;"><div style="width:26px;height:26px;background:var(--teal-glow);border-radius:50%;display:flex;align-items:center;justify-content:center;"><i class="fas fa-check" style="color:var(--teal);font-size:.65rem;"></i></div><span style="font-size:.81rem;color:var(--text-body);">No commitment required</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cf-card reveal-r">
+        <h4>Send Us a Message</h4>
+        <div class="form-row">
+          <div class="fg"><label>Full Name *</label><input type="text" id="cf-name" placeholder="John Smith" required/></div>
+          <div class="fg"><label>Company Name *</label><input type="text" id="cf-company" placeholder="Your Company" required/></div>
+        </div>
+        <div class="form-row">
+          <div class="fg"><label>Email Address *</label><input type="email" id="cf-email" placeholder="john@company.com" required/></div>
+          <div class="fg"><label>Phone Number</label><input type="tel" id="cf-phone" placeholder="+1 234 567 8900"/></div>
+        </div>
+        <div class="fg">
+          <label>Your Industry</label>
+          <select id="cf-industry">
+            <option value="">Select your industry...</option>
+            <option>Operations & Maintenance</option><option>Healthcare</option><option>Banking</option>
+            <option>Financial Services</option><option>Real Estate</option><option>E-Commerce</option>
+            <option>Sales</option><option>Manufacturing</option><option>Logistics & Supply Chain</option>
+            <option>HR</option><option>Trading & Financial Markets</option><option>Other</option>
+          </select>
+        </div>
+        <div class="fg">
+          <label>Service of Interest</label>
+          <select id="cf-service">
+            <option value="">Select a service...</option>
+            <option>Power BI Dashboard Development</option><option>KPI Dashboard Solutions</option>
+            <option>Executive Reporting</option><option>Data Analytics Consulting</option>
+            <option>Reporting Automation</option><option>Excel Automation</option>
+            <option>Trading Analytics</option><option>AI Trading Bots</option><option>General Consultation</option>
+          </select>
+        </div>
+        <div class="fg"><label>Your Message *</label><textarea id="cf-message" placeholder="Tell us about your data challenges, current tools, and what you're hoping to achieve..." required></textarea></div>
+        <button class="btn btn-primary form-submit" onclick="submitForm()"><i class="fas fa-paper-plane"></i> Send Message</button>
+      </div>
+    </div></div>
+  </section>
+
+  <footer><div class="container"><div class="footer-inner">
+    <div class="fb"><div class="fb-logo"><div class="fbl-img"><img src="assets/logo.png" alt="Logo" onerror="this.style.display='none';this.parentElement.innerHTML='<span style=\'font-family:Poppins;font-weight:900;font-size:.85rem;color:#0a1628;\'>IF</span>'"/></div><div><div class="fb-name">InsightForge Intelligence</div><div class="fb-tag">LTSGFH</div></div></div><p>Transforming Data into Intelligence — schedule your free consultation today.</p><div class="f-social"><a href="#" class="fs-btn"><i class="fab fa-linkedin-in"></i></a><a href="mailto:info@insightforge.ai" class="fs-btn"><i class="fas fa-envelope"></i></a><a href="https://wa.me/1234567890" class="fs-btn"><i class="fab fa-whatsapp"></i></a></div></div>
+    <div class="fc-col"><h5>Services</h5><ul><li><span onclick="showPage('services')">Business Intelligence</span></li><li><span onclick="showPage('services')">Data Analytics</span></li><li><span onclick="showPage('services')">Automation</span></li><li><span onclick="showPage('services')">Trading Analytics</span></li></ul></div>
+    <div class="fc-col"><h5>Industries</h5><ul><li><span onclick="showPage('industries')">Operations & Maintenance</span></li><li><span onclick="showPage('industries')">Healthcare</span></li><li><span onclick="showPage('industries')">Banking</span></li><li><span onclick="showPage('industries')">Manufacturing</span></li></ul></div>
+    <div class="fc-col"><h5>Company</h5><ul><li><span onclick="showPage('home')">Home</span></li><li><span onclick="showPage('solutions')">Solutions</span></li><li><span onclick="showPage('about')">About</span></li><li><a href="#">Privacy Policy</a></li></ul></div>
+  </div><div class="footer-bottom"><p>© <span class="yr-span"></span> LTSGFH InsightForge Intelligence. All rights reserved.</p><div class="fb-links"><a href="#">Privacy Policy</a><a href="#">Terms</a></div></div></div></footer>
+</div><!-- END CONTACT -->
+
+<!-- SCROLL TOP -->
+<button id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Scroll to top">
+  <i class="fas fa-chevron-up"></i>
+</button>
+
+<!-- ============================================================
+     JAVASCRIPT
+============================================================ -->
+<script>
+/* ---- DYNAMIC YEAR — FIX #5 ---- */
+var currentYear = new Date().getFullYear();
+document.getElementById('yr').textContent = currentYear;
+var yrSpans = document.querySelectorAll('.yr-span');
+for(var i=0;i<yrSpans.length;i++){ yrSpans[i].textContent = currentYear; }
+
+/* ---- PAGE NAVIGATION ---- */
+function showPage(id){
+  var pages = document.querySelectorAll('.page');
+  for(var i=0;i<pages.length;i++){ pages[i].classList.remove('active'); }
+  var target = document.getElementById('page-'+id);
+  if(target){ target.classList.add('active'); }
+  var navItems = document.querySelectorAll('.nav-item');
+  for(var j=0;j<navItems.length;j++){
+    navItems[j].classList.toggle('active', navItems[j].getAttribute('data-page')===id);
+  }
+  window.scrollTo(0,0);
+  setTimeout(initReveal, 100);
+}
+
+/* ---- HAMBURGER ---- */
+document.getElementById('hamburger').addEventListener('click',function(){
+  document.getElementById('mobMenu').classList.toggle('open');
+});
+function closeMob(){ document.getElementById('mobMenu').classList.remove('open'); }
+
+/* ---- SCROLL ---- */
+window.addEventListener('scroll',function(){
+  document.getElementById('scrollTop').classList.toggle('show', (window.scrollY||window.pageYOffset) > 400);
+});
+
+/* ---- REVEAL ANIMATIONS ---- */
+function initReveal(){
+  var els = document.querySelectorAll('.reveal:not(.up),.reveal-l:not(.up),.reveal-r:not(.up)');
+  if(!els.length) return;
+  if('IntersectionObserver' in window){
+    var obs = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){ e.target.classList.add('up'); obs.unobserve(e.target); }
+      });
+    },{threshold:0.08,rootMargin:'0px 0px -30px 0px'});
+    els.forEach(function(el){ obs.observe(el); });
+  } else {
+    els.forEach(function(el){ el.classList.add('up'); });
+  }
+}
+
+/* ---- HERO CAROUSEL — FIX #8 ---- */
+var carouselLabels = ['Manufacturing Intelligence','Banking Analytics','Healthcare Analytics','Logistics Analytics'];
+var currentSlide = 0;
+var carouselTimer = null;
+
+function goSlide(n){
+  var slides = document.querySelectorAll('.carousel-slide');
+  var dots   = document.querySelectorAll('.cdot');
+  var lbl    = document.getElementById('carouselLbl');
+  if(!slides.length) return;
+  slides[currentSlide].classList.remove('active');
+  dots[currentSlide].classList.remove('active');
+  currentSlide = n;
+  slides[currentSlide].classList.add('active');
+  dots[currentSlide].classList.add('active');
+  if(lbl) lbl.textContent = carouselLabels[currentSlide];
+}
+
+function nextSlide(){
+  goSlide((currentSlide + 1) % 4);
+}
+
+function startCarousel(){
+  if(carouselTimer) clearInterval(carouselTimer);
+  carouselTimer = setInterval(nextSlide, 3500);
+}
+
+/* ---- CONTACT FORM ---- */
+function submitForm(){
+  var name  = document.getElementById('cf-name').value.trim();
+  var email = document.getElementById('cf-email').value.trim();
+  var msg   = document.getElementById('cf-message').value.trim();
+  if(!name || !email || !msg){
+    alert('Please fill in all required fields (Name, Email, Message).');
+    return;
+  }
+  var btn = document.querySelector('.form-submit');
+  btn.innerHTML = '<i class="fas fa-check"></i> Message Sent Successfully!';
+  btn.style.background = 'linear-gradient(135deg,#22c55e,#16a34a)';
+  btn.disabled = true;
+  setTimeout(function(){
+    btn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
+    btn.style.background = '';
+    btn.disabled = false;
+    ['cf-name','cf-company','cf-email','cf-phone','cf-message'].forEach(function(id){
+      var el = document.getElementById(id); if(el) el.value = '';
+    });
+    document.getElementById('cf-industry').value = '';
+    document.getElementById('cf-service').value  = '';
+  }, 4000);
+}
+
+/* ---- INIT ---- */
+window.addEventListener('load', function(){
+  initReveal();
+  startCarousel();
+  window.dispatchEvent(new Event('scroll'));
+});
+initReveal();
+</script>
+</body>
+</html>
