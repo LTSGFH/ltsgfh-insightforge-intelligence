@@ -1289,7 +1289,7 @@ footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.06);padding
 </div><!-- END ABOUT -->
 
 <!-- ============================================================
-     PAGE: CONTACT
+     PAGE: CONTACT  ← UPDATED WITH CLASSIC FORMSUBMIT
 ============================================================ -->
 <div class="page" id="page-contact">
   <section class="contact-hero">
@@ -1325,39 +1325,88 @@ footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.06);padding
         </div>
       </div>
 
+      <!-- ✅ UPDATED CONTACT FORM - Classic FormSubmit (No AJAX) -->
       <div class="cf-card reveal-r">
         <h4>Send Us a Message</h4>
-        <div class="form-row">
-          <div class="fg"><label>Full Name *</label><input type="text" id="cf-name" placeholder="John Smith" required/></div>
-          <div class="fg"><label>Company Name *</label><input type="text" id="cf-company" placeholder="Your Company" required/></div>
-        </div>
-        <div class="form-row">
-          <div class="fg"><label>Email Address *</label><input type="email" id="cf-email" placeholder="john@company.com" required/></div>
-          <div class="fg"><label>Phone Number</label><input type="tel" id="cf-phone" placeholder="+1 234 567 8900"/></div>
-        </div>
-        <div class="fg">
-          <label>Your Industry</label>
-          <select id="cf-industry">
-            <option value="">Select your industry...</option>
-            <option>Operations & Maintenance</option><option>Healthcare</option><option>Banking</option>
-            <option>Financial Services</option><option>Real Estate</option><option>E-Commerce</option>
-            <option>Sales</option><option>Manufacturing</option><option>Logistics & Supply Chain</option>
-            <option>HR</option><option>Trading & Financial Markets</option><option>Other</option>
-          </select>
-        </div>
-        <div class="fg">
-          <label>Service of Interest</label>
-          <select id="cf-service">
-            <option value="">Select a service...</option>
-            <option>Power BI Dashboard Development</option><option>KPI Dashboard Solutions</option>
-            <option>Executive Reporting</option><option>Data Analytics Consulting</option>
-            <option>Reporting Automation</option><option>Excel Automation</option>
-            <option>Trading Analytics</option><option>AI Trading Bots</option><option>General Consultation</option>
-          </select>
-        </div>
-        <div class="fg"><label>Your Message *</label><textarea id="cf-message" placeholder="Tell us about your data challenges, current tools, and what you're hoping to achieve..." required></textarea></div>
-        <button class="btn btn-primary form-submit" onclick="submitForm()"><i class="fas fa-paper-plane"></i> Send Message</button>
+        <form action="https://formsubmit.co/ltsgfh.analytics@gmail.com" method="POST">
+
+          <!-- FormSubmit Configuration -->
+          <input type="hidden" name="_captcha"  value="false">
+          <input type="hidden" name="_subject"  value="New Inquiry — LTSGFH InsightForge Intelligence">
+          <input type="hidden" name="_template" value="table">
+          <!-- ⚠️ REPLACE THIS URL with your actual GitHub Pages URL -->
+          <input type="hidden" name="_next"     value="https://YOURUSERNAME.github.io/YOURREPO/index.html">
+
+          <div class="form-row">
+            <div class="fg">
+              <label>Full Name *</label>
+              <input type="text" name="Full Name" placeholder="John Smith" required/>
+            </div>
+            <div class="fg">
+              <label>Company Name *</label>
+              <input type="text" name="Company Name" placeholder="Your Company" required/>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="fg">
+              <label>Email Address *</label>
+              <input type="email" name="Email" placeholder="john@company.com" required/>
+            </div>
+            <div class="fg">
+              <label>Phone Number</label>
+              <input type="tel" name="Phone Number" placeholder="+1 234 567 8900"/>
+            </div>
+          </div>
+
+          <div class="fg">
+            <label>Your Industry</label>
+            <select name="Industry">
+              <option value="">Select your industry...</option>
+              <option>Operations & Maintenance</option>
+              <option>Healthcare</option>
+              <option>Banking</option>
+              <option>Financial Services</option>
+              <option>Real Estate</option>
+              <option>E-Commerce</option>
+              <option>Sales</option>
+              <option>Manufacturing</option>
+              <option>Logistics & Supply Chain</option>
+              <option>HR</option>
+              <option>Trading & Financial Markets</option>
+              <option>Other</option>
+            </select>
+          </div>
+
+          <div class="fg">
+            <label>Service of Interest</label>
+            <select name="Service">
+              <option value="">Select a service...</option>
+              <option>Power BI Dashboard Development</option>
+              <option>KPI Dashboard Solutions</option>
+              <option>Executive Reporting</option>
+              <option>Data Analytics Consulting</option>
+              <option>Reporting Automation</option>
+              <option>Excel Automation</option>
+              <option>Trading Analytics</option>
+              <option>AI Trading Bots</option>
+              <option>General Consultation</option>
+            </select>
+          </div>
+
+          <div class="fg">
+            <label>Your Message *</label>
+            <textarea name="Message" placeholder="Tell us about your data challenges, current tools, and what you're hoping to achieve..." required></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary form-submit">
+            <i class="fas fa-paper-plane"></i> Send Message
+          </button>
+
+        </form>
       </div>
+      <!-- END UPDATED FORM -->
+
     </div></div>
   </section>
 
@@ -1379,7 +1428,7 @@ footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.06);padding
 </button>
 
 <!-- ============================================================
-     JAVASCRIPT
+     JAVASCRIPT  ← submitForm() REMOVED (no longer needed)
 ============================================================ -->
 <script>
 /* ---- DYNAMIC YEAR ---- */
@@ -1452,79 +1501,6 @@ function nextSlide(){ goSlide((currentSlide + 1) % 4); }
 function startCarousel(){
   if(carouselTimer) clearInterval(carouselTimer);
   carouselTimer = setInterval(nextSlide, 3500);
-}
-
-/* ---- CONTACT FORM ---- */
-async function submitForm(){
-  var name     = document.getElementById('cf-name').value.trim();
-  var company  = document.getElementById('cf-company').value.trim();
-  var email    = document.getElementById('cf-email').value.trim();
-  var phone    = document.getElementById('cf-phone').value.trim();
-  var industry = document.getElementById('cf-industry').value;
-  var service  = document.getElementById('cf-service').value;
-  var msg      = document.getElementById('cf-message').value.trim();
-
-  // ✅ Your original validation kept
-  if(!name || !email || !msg){
-    alert('Please fill in all required fields (Name, Email, Message).');
-    return;
-  }
-
-  var btn = document.querySelector('.form-submit');
-  btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
-  btn.disabled  = true;
-
-  // ✅ Build form data for FormSubmit
-  var formData = new FormData();
-  formData.append('Full Name',    name);
-  formData.append('Company Name', company);
-  formData.append('Email',        email);
-  formData.append('Phone Number', phone);
-  formData.append('Industry',     industry);
-  formData.append('Service',      service);
-  formData.append('Message',      msg);
-  formData.append('_captcha',     'false');
-  formData.append('_subject',     'New Inquiry from LTSGFH Website');
-  formData.append('_template',    'table');
-
-  try {
-    var response = await fetch('https://formsubmit.co/ajax/ltsgfh.analytics@gmail.com', {
-      method:  'POST',
-      headers: { 'Accept': 'application/json' },
-      body:    formData
-    });
-
-    var result = await response.json();
-
-    if(result.success === 'true' || result.success === true){
-
-      // ✅ Your original success style kept
-      btn.innerHTML        = '<i class="fas fa-check"></i> Message Sent Successfully!';
-      btn.style.background = 'linear-gradient(135deg,#22c55e,#16a34a)';
-
-      // ✅ Your original setTimeout kept
-      setTimeout(function(){
-        btn.innerHTML        = '<i class="fas fa-paper-plane"></i> Send Message';
-        btn.style.background = '';
-        btn.disabled         = false;
-        ['cf-name','cf-company','cf-email','cf-phone','cf-message'].forEach(function(id){
-          var el = document.getElementById(id); if(el) el.value = '';
-        });
-        document.getElementById('cf-industry').value = '';
-        document.getElementById('cf-service').value  = '';
-      }, 4000);
-
-    } else {
-      throw new Error('Failed');
-    }
-
-  } catch(err) {
-    // ✅ Reset button on error
-    btn.innerHTML        = '<i class="fas fa-paper-plane"></i> Send Message';
-    btn.style.background = '';
-    btn.disabled         = false;
-    alert('Something went wrong! Please email us directly at ltsgfh.analytics@gmail.com');
-  }
 }
 
 /* ---- INIT ---- */
