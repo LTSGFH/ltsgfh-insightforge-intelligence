@@ -1455,28 +1455,76 @@ function startCarousel(){
 }
 
 /* ---- CONTACT FORM ---- */
-function submitForm(){
-  var name  = document.getElementById('cf-name').value.trim();
-  var email = document.getElementById('cf-email').value.trim();
-  var msg   = document.getElementById('cf-message').value.trim();
+async function submitForm(){
+  var name     = document.getElementById('cf-name').value.trim();
+  var company  = document.getElementById('cf-company').value.trim();
+  var email    = document.getElementById('cf-email').value.trim();
+  var phone    = document.getElementById('cf-phone').value.trim();
+  var industry = document.getElementById('cf-industry').value;
+  var service  = document.getElementById('cf-service').value;
+  var msg      = document.getElementById('cf-message').value.trim();
+
+  // ✅ Your original validation kept
   if(!name || !email || !msg){
     alert('Please fill in all required fields (Name, Email, Message).');
     return;
   }
+
   var btn = document.querySelector('.form-submit');
-  btn.innerHTML = '<i class="fas fa-check"></i> Message Sent Successfully!';
-  btn.style.background = 'linear-gradient(135deg,#22c55e,#16a34a)';
-  btn.disabled = true;
-  setTimeout(function(){
-    btn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
-    btn.style.background = '';
-    btn.disabled = false;
-    ['cf-name','cf-company','cf-email','cf-phone','cf-message'].forEach(function(id){
-      var el = document.getElementById(id); if(el) el.value = '';
+  btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+  btn.disabled  = true;
+
+  // ✅ Build form data for FormSubmit
+  var formData = new FormData();
+  formData.append('Full Name',    name);
+  formData.append('Company Name', company);
+  formData.append('Email',        email);
+  formData.append('Phone Number', phone);
+  formData.append('Industry',     industry);
+  formData.append('Service',      service);
+  formData.append('Message',      msg);
+  formData.append('_captcha',     'false');
+  formData.append('_subject',     'New Inquiry from LTSGFH Website');
+  formData.append('_template',    'table');
+
+  try {
+    var response = await fetch('https://formsubmit.co/ajax/ltsgfh.analytics@gmail.com', {
+      method:  'POST',
+      headers: { 'Accept': 'application/json' },
+      body:    formData
     });
-    document.getElementById('cf-industry').value = '';
-    document.getElementById('cf-service').value  = '';
-  }, 4000);
+
+    var result = await response.json();
+
+    if(result.success === 'true' || result.success === true){
+
+      // ✅ Your original success style kept
+      btn.innerHTML        = '<i class="fas fa-check"></i> Message Sent Successfully!';
+      btn.style.background = 'linear-gradient(135deg,#22c55e,#16a34a)';
+
+      // ✅ Your original setTimeout kept
+      setTimeout(function(){
+        btn.innerHTML        = '<i class="fas fa-paper-plane"></i> Send Message';
+        btn.style.background = '';
+        btn.disabled         = false;
+        ['cf-name','cf-company','cf-email','cf-phone','cf-message'].forEach(function(id){
+          var el = document.getElementById(id); if(el) el.value = '';
+        });
+        document.getElementById('cf-industry').value = '';
+        document.getElementById('cf-service').value  = '';
+      }, 4000);
+
+    } else {
+      throw new Error('Failed');
+    }
+
+  } catch(err) {
+    // ✅ Reset button on error
+    btn.innerHTML        = '<i class="fas fa-paper-plane"></i> Send Message';
+    btn.style.background = '';
+    btn.disabled         = false;
+    alert('Something went wrong! Please email us directly at ltsgfh.analytics@gmail.com');
+  }
 }
 
 /* ---- INIT ---- */
